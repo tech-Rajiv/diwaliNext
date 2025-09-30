@@ -4,8 +4,10 @@ import BasicProductCardComp from "./BasicProductCardComp";
 
 function SingleProductBox({ prod }) {
   return (
-    <div className="">
-      <BasicProductCardComp details={prod} />
+    <div className="h-50 outline rounded-lg">
+      <h2>Title:{prod.title}</h2>
+      <p>price :{prod.price}</p>
+      <p>available stock :{prod.available_stock}</p>
     </div>
   );
 }

@@ -1,16 +1,22 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import SingleProductBox from "../components/SingleProductBox";
+import Category from "../components/Category";
+import ProductsShowComp from "../components/ProductsShowComp";
 
 function page() {
   const [allProducts, setAllProducts] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const fetchAllProducts = async () => {
+  const [selectedCategoryId, setSelectedCategoryId] = useState(1);
+
+  const fetchAllProducts = async (categoryId) => {
+    setLoading(true);
     try {
-      const res = await fetch("/api/products");
-      if (!res.ok) throw new Error("error occured while fetching the products");
+      const res = await fetch(`/api/products?category_id=${categoryId}`);
+      console.log(res);
+      if (!res.ok) throw new Error(res.statusText);
       const data = await res.json();
+      console.log(data);
       setAllProducts(data);
     } catch (error) {
       setError(error?.message);
@@ -18,25 +24,19 @@ function page() {
       setLoading(false);
     }
   };
-  useEffect(() => {
-    setLoading(true);
-    fetchAllProducts();
-  }, []);
 
-  if (loading) {
-    return "Loading...";
-  }
-  if (error) {
-    return <p>{error}</p>;
-  }
+  useEffect(() => {
+    fetchAllProducts(selectedCategoryId);
+    console.log("select category hnaged to ", selectedCategoryId);
+  }, [selectedCategoryId]);
   return (
-    <div>
-      <h2>Products</h2>
-      <div className="allPRods grid grid-cols-2 sm:grid-cols-6 gap-5 mt-5">
-        {allProducts?.map((prod, i) => (
-          <SingleProductBox key={i} prod={prod} />
-        ))}
-      </div>
+    <div className="flex flex-col gap-5">
+      <Category setSelectedCategoryId={setSelectedCategoryId} />
+      <ProductsShowComp
+        error={error}
+        loading={loading}
+        allProducts={allProducts}
+      />
     </div>
   );
 }
