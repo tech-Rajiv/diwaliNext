@@ -3,11 +3,12 @@ import React from "react";
 import BasicProductCardComp from "./BasicProductCardComp";
 
 function SingleProductBox({ prod }) {
+  console.log(prod);
   return (
-    <div className="h-50 outline rounded-lg">
-      <h2>Title:{prod.title}</h2>
-      <p>price :{prod.price}</p>
-      <p>available stock :{prod.available_stock}</p>
+    <div className="h-50 outline shadow rounded-lg p-5">
+      <h2>Title:{prod?.title}</h2>
+      <p>price :{prod?.price}</p>
+      <p>available stock :{prod?.available_stock}</p>
     </div>
   );
 }

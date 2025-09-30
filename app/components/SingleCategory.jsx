@@ -7,9 +7,9 @@ function SingleCategory({ category, setSelectedCategoryId }) {
   return (
     <button
       onClick={handleChangeSelectedCategory}
-      className="w-18 h-18 flex justify-center cursor-pointer active:bg-gray-300 rounded-full items-center bg-gray-200"
+      className="w-18 h-18 flex justify-center cursor-pointer active:bg-gray-200 rounded-full items-center bg-gray-100"
     >
-      {category.name.slice(0, 3)}
+      {category.name.slice(0, 4)}
     </button>
   );
 }
