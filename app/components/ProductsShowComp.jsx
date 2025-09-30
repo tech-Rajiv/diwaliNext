@@ -6,10 +6,13 @@ function ProductsShowComp({ allProducts, loading }) {
     return "Loading...";
   }
   return (
-    <div className="grid grid-cols-2 grid-cols-6 gap-5 ">
-      {allProducts?.map((prod, index) => (
-        <SingleProductBox key={index} prod={prod} />
-      ))}
+    <div className="wrapper">
+      <h2>Products</h2>
+      <div className="grid grid-cols-2 sm:grid-cols-6 gap-5 mt-5">
+        {allProducts?.map((prod, index) => (
+          <SingleProductBox key={index} prod={prod} />
+        ))}
+      </div>
     </div>
   );
 }

@@ -12,8 +12,9 @@ function Header() {
   const handleNavigateToHome = () => router.push("/");
   const handleNavigateToAbout = () => router.push("/about");
   const handleNavigateToContact = () => router.push("/contact");
+  const handleNavigateToAddProducts = () => router.push("/addproducts");
   return (
-    <header className="py-5 sm:px-10 px-2 flex justify-between shadow">
+    <header className="py-5 sm:px-10 px-5 flex justify-between shadow">
       <div
         className="logo text-lg font-semibold cursor-pointer"
         onClick={handleNavigateToHome}
@@ -38,6 +39,12 @@ function Header() {
           onClick={handleNavigateToContact}
         >
           Contact
+        </button>
+        <button
+          className="contact cursor-pointer"
+          onClick={handleNavigateToAddProducts}
+        >
+          AddProduct
         </button>
       </div>
       <div className="menu sm:hidden">
