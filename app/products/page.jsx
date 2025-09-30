@@ -13,10 +13,8 @@ function page() {
     setLoading(true);
     try {
       const res = await fetch(`/api/products?category_id=${categoryId}`);
-      console.log(res);
       if (!res.ok) throw new Error(res.statusText);
       const data = await res.json();
-      console.log(data);
       setAllProducts(data);
     } catch (error) {
       setError(error?.message);
@@ -27,7 +25,6 @@ function page() {
 
   useEffect(() => {
     fetchAllProducts(selectedCategoryId);
-    console.log("select category hnaged to ", selectedCategoryId);
   }, [selectedCategoryId]);
   return (
     <div className="flex flex-col gap-8">

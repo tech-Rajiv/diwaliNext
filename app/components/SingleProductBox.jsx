@@ -3,7 +3,6 @@ import React from "react";
 import BasicProductCardComp from "./BasicProductCardComp";
 
 function SingleProductBox({ prod }) {
-  console.log(prod);
   return (
     <div className="h-50 outline shadow rounded-lg p-5">
       <h2>Title:{prod?.title}</h2>
