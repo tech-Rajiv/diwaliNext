@@ -30,7 +30,7 @@ function page() {
     console.log("select category hnaged to ", selectedCategoryId);
   }, [selectedCategoryId]);
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-8">
       <Category setSelectedCategoryId={setSelectedCategoryId} />
       <ProductsShowComp
         error={error}
