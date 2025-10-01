@@ -34,9 +34,8 @@ function Category({ selectedCategoryId, setSelectedCategoryId }) {
       <h2>Category</h2>
       <div className="all flex gap-5 mt-5">
         {allCategories?.map((category, index) => (
-          <div>
+          <div key={index}>
             <SingleCategory
-              key={index}
               category={category}
               setSelectedCategoryId={setSelectedCategoryId}
             />

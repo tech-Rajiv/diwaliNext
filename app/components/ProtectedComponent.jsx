@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 function ProtectedComponent({ children }) {
@@ -9,6 +9,7 @@ function ProtectedComponent({ children }) {
   if (isLoggedIn) {
     return children;
   }
+
   return (
     <div className="h-60 flex flex-col items-center justify-center bg-black/20 bg-opacity-50 text-white z-50">
       <h2 className="text-xl mb-4">Login to add products.</h2>

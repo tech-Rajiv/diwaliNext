@@ -34,6 +34,9 @@ function page() {
         body: JSON.stringify(formData),
       });
       if (!res.ok) {
+        if (res.status === 401) {
+          throw new Error("Invalid email or password");
+        }
         throw new Error(res?.statusText);
       }
       const data = await res.json();
@@ -49,7 +52,7 @@ function page() {
       router.push("/products");
     } catch (error) {
       setError(error?.message ?? "something went bad");
-      toast.error("something went wrong");
+      toast.error(error.message);
     } finally {
       setLoading(false);
     }

@@ -24,7 +24,12 @@ function DialogBox({ name, onClickYesFn, heading, content, loading }) {
           <DialogClose asChild>
             <Button variant="outline">Back</Button>
           </DialogClose>
-          <Button type="submit" disabled={loading} onClick={onClickYesFn}>
+          <Button
+            className={"cursor-pointer"}
+            type="submit"
+            disabled={loading}
+            onClick={onClickYesFn}
+          >
             {loading ? "wait..." : "Yes"}
           </Button>
         </DialogFooter>
