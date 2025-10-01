@@ -3,7 +3,7 @@ import React from "react";
 function page() {
   return (
     <div className="flex flex-col gap-5">
-      <h2 className="head">About</h2>
+      <h2 className="head">How to use this app</h2>
       <p>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos cum minus
         maxime magnam temporibus blanditiis, architecto dolorem ex ipsam impedit

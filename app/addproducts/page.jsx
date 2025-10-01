@@ -15,22 +15,20 @@ function page() {
   };
 
   const submitTheForm = async () => {
-    console.log("formdata to send", formData);
     const res = await fetch("/api/addproduct", {
       method: "POST",
       body: JSON.stringify(formData),
     });
     const data = await res.json();
-    console.log("data", data);
   };
 
-  let secretKey;
-  if (typeof window !== "undefined") {
-    secretKey = localStorage.getItem("secret");
-  }
-  if (!secretKey) {
-    return "Your are not allowed to add products";
-  }
+  // let secretKey;
+  // if (typeof window !== "undefined") {
+  //   secretKey = localStorage.getItem("secret");
+  // }
+  // if (!secretKey) {
+  //   return "Your are not allowed to add products";
+  // }
   return (
     <div className="flex flex-col gap-5 max-w-lg mx-auto">
       <h2>Add Products</h2>

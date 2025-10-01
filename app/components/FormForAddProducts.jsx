@@ -1,40 +1,37 @@
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import React from "react";
 
 function FormForAddProducts({ handleOnChangeOfInputs, submitTheForm }) {
   return (
     <div className="forms flex flex-col gap-2">
-      <input
+      <Input
         type="text"
         placeholder="title"
-        className="border p-2 rounded"
         name="title"
         onChange={handleOnChangeOfInputs}
       />
-      <input
+
+      <Input
         type="text"
         placeholder="description"
-        className="border p-2 rounded"
         name="description"
         onChange={handleOnChangeOfInputs}
       />
-      <input
+      <Input
         type="number"
         placeholder="price"
-        className="border p-2 rounded"
         onChange={handleOnChangeOfInputs}
         name="price"
       />
-      <input
+      <Input
         type="number"
         placeholder="available stock"
-        className="border p-2 rounded"
         onChange={handleOnChangeOfInputs}
         name="available_stock"
       />
       <div className="btn">
-        <button className="btnPrimary" onClick={submitTheForm}>
-          Add Product
-        </button>
+        <Button onClick={submitTheForm}>Add Product</Button>
       </div>
     </div>
   );
