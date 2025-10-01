@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ReduxProvider from "./components/ReduxProvider";
 import { Toaster } from "@/components/ui/sonner";
+import AuthIntializer from "./components/AuthIntializer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,11 +28,13 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReduxProvider>
-          <Toaster />
-          <Header />
-          <div className="main sm:py-10 py-5  sm:px-10 min-h-screen max-w-7xl mx-auto">
-            {children}
-          </div>
+          <AuthIntializer>
+            <Toaster />
+            <Header />
+            <div className="main sm:py-10 py-5  sm:px-10 min-h-screen max-w-7xl mx-auto">
+              {children}
+            </div>
+          </AuthIntializer>
         </ReduxProvider>
         <Footer />
       </body>

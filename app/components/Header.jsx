@@ -106,6 +106,12 @@ function Header() {
               Products
             </button>
             <button
+              className="contact cursor-pointer"
+              onClick={handleNavigateToAddProducts}
+            >
+              AddProduct
+            </button>
+            <button
               className="about cursor-pointer"
               onClick={handleNavigateToGuide}
             >

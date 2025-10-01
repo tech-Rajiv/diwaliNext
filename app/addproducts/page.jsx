@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import FormForAddProducts from "../components/FormForAddProducts";
+import ProtectedComponent from "../components/ProtectedComponent";
 
 function page() {
   const [formData, setFormData] = useState({
@@ -22,20 +23,17 @@ function page() {
     const data = await res.json();
   };
 
-  // let secretKey;
-  // if (typeof window !== "undefined") {
-  //   secretKey = localStorage.getItem("secret");
-  // }
-  // if (!secretKey) {
-  //   return "Your are not allowed to add products";
-  // }
   return (
-    <div className="flex flex-col gap-5 max-w-lg mx-auto">
-      <h2>Add Products</h2>
-      <FormForAddProducts
-        handleOnChangeOfInputs={handleOnChangeOfInputs}
-        submitTheForm={submitTheForm}
-      />
+    <div className="">
+      <h2 className="text-center mb-5">Add Products</h2>
+      <ProtectedComponent>
+        <div className="wrapper max-w-lg mx-auto">
+          <FormForAddProducts
+            handleOnChangeOfInputs={handleOnChangeOfInputs}
+            submitTheForm={submitTheForm}
+          />
+        </div>
+      </ProtectedComponent>
     </div>
   );
 }
