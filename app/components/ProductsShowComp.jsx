@@ -7,8 +7,7 @@ function ProductsShowComp({ allProducts, loading }) {
   }
   return (
     <div className="wrapper">
-      <h2>Products</h2>
-      <div className="grid grid-cols-2 sm:grid-cols-6 gap-5 mt-5">
+      <div className="grid grid-cols-2 sm:grid-cols-6 gap-5 ">
         {allProducts?.map((prod, index) => (
           <SingleProductBox key={index} prod={prod} />
         ))}

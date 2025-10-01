@@ -27,8 +27,11 @@ function page() {
     fetchAllProducts(selectedCategoryId);
   }, [selectedCategoryId]);
   return (
-    <div className="flex flex-col gap-8">
-      <Category setSelectedCategoryId={setSelectedCategoryId} />
+    <div className="flex flex-col gap-8 px-5">
+      <Category
+        selectedCategoryId={selectedCategoryId}
+        setSelectedCategoryId={setSelectedCategoryId}
+      />
       <ProductsShowComp
         error={error}
         loading={loading}

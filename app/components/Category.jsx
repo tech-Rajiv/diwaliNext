@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SingleCategory from "./SingleCategory";
 
-function Category({ setSelectedCategoryId }) {
+function Category({ selectedCategoryId, setSelectedCategoryId }) {
   const [allCategories, setAllCategories] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -34,11 +34,18 @@ function Category({ setSelectedCategoryId }) {
       <h2>Category</h2>
       <div className="all flex gap-5 mt-5">
         {allCategories?.map((category, index) => (
-          <SingleCategory
-            key={index}
-            category={category}
-            setSelectedCategoryId={setSelectedCategoryId}
-          />
+          <div>
+            <SingleCategory
+              key={index}
+              category={category}
+              setSelectedCategoryId={setSelectedCategoryId}
+            />
+            <div
+              className={`${
+                selectedCategoryId == category.id ? "" : "hidden"
+              } w-full h-[1px] shadow bg-black/40 mt-5`}
+            ></div>
+          </div>
         ))}
       </div>
     </div>
