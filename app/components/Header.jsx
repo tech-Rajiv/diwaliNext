@@ -57,7 +57,7 @@ function Header() {
     </button>
   );
   return (
-    <header className="shadow py-5">
+    <header className="shadow py-5 ">
       <div className="nav sm:px-10 px-5 flex justify-between">
         <div
           className="logo text-lg font-semibold cursor-pointer"

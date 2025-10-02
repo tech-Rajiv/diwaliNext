@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Category from "../components/Category";
 import ProductsShowComp from "../components/ProductsShowComp";
+import BannerToShowPrice from "../components/BannerToShowPrice";
 
 function page() {
   const [allProducts, setAllProducts] = useState();
@@ -27,11 +28,14 @@ function page() {
     fetchAllProducts(selectedCategoryId);
   }, [selectedCategoryId]);
   return (
-    <div className="flex flex-col gap-8 px-5">
-      <Category
-        selectedCategoryId={selectedCategoryId}
-        setSelectedCategoryId={setSelectedCategoryId}
-      />
+    <div className="flex flex-col gap-5 ">
+      <BannerToShowPrice />
+      <div className="conatiner px-5 mt-5">
+        <Category
+          selectedCategoryId={selectedCategoryId}
+          setSelectedCategoryId={setSelectedCategoryId}
+        />
+      </div>
       <ProductsShowComp
         error={error}
         loading={loading}

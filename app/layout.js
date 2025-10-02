@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
           <AuthIntializer>
             <Toaster />
             <Header />
-            <div className="main sm:py-10 py-5  sm:px-10 min-h-screen max-w-7xl mx-auto">
+            <div className="main min-h-screen  max-w-7xl mx-auto">
               {children}
             </div>
           </AuthIntializer>

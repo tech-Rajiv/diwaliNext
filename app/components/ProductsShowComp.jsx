@@ -6,8 +6,8 @@ function ProductsShowComp({ allProducts, loading }) {
     return "Loading...";
   }
   return (
-    <div className="wrapper">
-      <div className="grid grid-cols-2 sm:grid-cols-6 gap-5 ">
+    <div className="wrapper mt-2">
+      <div className="flex gap-4 overflow-auto px-5 py-2  hide-scrollbar">
         {allProducts?.map((prod, index) => (
           <SingleProductBox key={index} prod={prod} />
         ))}

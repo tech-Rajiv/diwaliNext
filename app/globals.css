@@ -130,3 +130,17 @@
 .btnPrimary:hover {
   background-color: rgb(56, 56, 56);
 }
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE and Edge */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* For Firefox */
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+}

@@ -48,7 +48,7 @@ function page() {
   };
 
   return (
-    <div className="">
+    <div className="px-5">
       <h2 className="text-center mb-5">Add New Product</h2>
       {/* <ProtectedComponent> */}
       <div className="wrapper max-w-lg mx-auto">

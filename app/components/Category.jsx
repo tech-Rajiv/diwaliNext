@@ -31,19 +31,15 @@ function Category({ selectedCategoryId, setSelectedCategoryId }) {
   }
   return (
     <div>
-      <h2>Category</h2>
+      <h2 className="font-medium">Products</h2>
       <div className="all flex gap-5 mt-5">
         {allCategories?.map((category, index) => (
           <div key={index}>
             <SingleCategory
               category={category}
               setSelectedCategoryId={setSelectedCategoryId}
+              selectedCategoryId={selectedCategoryId}
             />
-            <div
-              className={`${
-                selectedCategoryId == category.id ? "" : "hidden"
-              } w-full h-[1px] shadow bg-black/40 mt-5`}
-            ></div>
           </div>
         ))}
       </div>
