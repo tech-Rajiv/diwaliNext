@@ -129,7 +129,6 @@ function SingleProductBox({ prod }) {
         <p>
           <span className="text-xs">1ps</span>
         </p>
-        {/* <p>available stock :{prod?.available_stock}</p> */}
       </div>
     </div>
   );

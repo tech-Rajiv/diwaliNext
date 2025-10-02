@@ -8,7 +8,7 @@ function page() {
   const [allProducts, setAllProducts] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [selectedCategoryId, setSelectedCategoryId] = useState(1);
+  const [selectedCategoryId, setSelectedCategoryId] = useState(2);
 
   const fetchAllProducts = async (categoryId) => {
     setLoading(true);

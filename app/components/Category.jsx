@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SingleCategory from "./SingleCategory";
+import SkeletonForCategories from "./uiByMe/SkeletonForCategories";
 
 function Category({ selectedCategoryId, setSelectedCategoryId }) {
   const [allCategories, setAllCategories] = useState();
@@ -23,9 +24,6 @@ function Category({ selectedCategoryId, setSelectedCategoryId }) {
     fetchAllCategories();
   }, []);
 
-  if (loading) {
-    return "Loading...";
-  }
   if (error) {
     return <p>{error}</p>;
   }
@@ -33,6 +31,7 @@ function Category({ selectedCategoryId, setSelectedCategoryId }) {
     <div>
       <h2 className="font-medium">Products</h2>
       <div className="all flex gap-5 mt-5">
+        {loading && <SkeletonForCategories />}
         {allCategories?.map((category, index) => (
           <div key={index}>
             <SingleCategory
