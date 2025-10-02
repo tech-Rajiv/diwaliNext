@@ -88,7 +88,7 @@ function SingleProductBox({ prod }) {
   };
   return (
     <div className="">
-      <div className="img relative w-37 h-30 bg-gray-100 rounded-lg overflow-hidden">
+      <div className="img relative w-35 h-35 bg-gray-100 rounded-lg overflow-hidden">
         {prod.image_url && (
           <img
             src={prod.image_url}
@@ -105,7 +105,7 @@ function SingleProductBox({ prod }) {
               >
                 -
               </button>
-              <div className=" bg-white px-2 font-medium  rounded">
+              <div className=" bg-white px-2  font-medium  rounded">
                 {localQuantiy}
               </div>
               <button
@@ -117,7 +117,7 @@ function SingleProductBox({ prod }) {
             </div>
           ) : (
             <button
-              className="cursor-pointer rounded-md bg-white px-2 "
+              className="cursor-pointer rounded-md font-medium bg-white px-2 "
               onClick={handleBuyProduct}
             >
               Buy
