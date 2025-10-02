@@ -4,8 +4,14 @@ import { NextResponse } from "next/server";
 export async function POST(request) {
   const formData = await request.json();
   try {
-    const { title, description, price, available_stock, category_id } =
-      formData;
+    const {
+      title,
+      description,
+      price,
+      available_stock,
+      category_id,
+      image_url,
+    } = formData;
     const { data, error } = await supabase.from("products").insert([
       {
         title,
@@ -13,6 +19,7 @@ export async function POST(request) {
         price,
         available_stock,
         category_id,
+        image_url,
       },
     ]);
     if (error) {

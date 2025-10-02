@@ -20,7 +20,6 @@ function SingleProductBox({ prod }) {
     });
   }, [productAlreadyInCart]);
 
-  console.log("overallProducts: ", overallProductsCart);
   const handleBuyProduct = () => {
     const { category_id, id, price, title } = prod;
     let updateProducts;
@@ -55,7 +54,6 @@ function SingleProductBox({ prod }) {
         return x;
       });
     }
-    console.log(updatedProducts, "updated");
     justUpdateTheStore(updatedProducts);
     setLocalQuantity((prev) => prev - 1);
   };
@@ -79,7 +77,6 @@ function SingleProductBox({ prod }) {
     array.forEach((x) => {
       total += (x.price || 0) * (x.quanity || 0);
     });
-    console.log(total, "total");
     return total;
   };
   const getTotalQuantity = (array) => {
@@ -87,24 +84,32 @@ function SingleProductBox({ prod }) {
     array.forEach((x) => {
       quantity += x.quanity;
     });
-    console.log(" quantity: ", quantity);
     return quantity;
   };
   return (
-    <div className=" rounded-lg">
-      <div className="img relative w-32 h-25 bg-gray-100 rounded-lg">
+    <div className="">
+      <div className="img relative w-32 h-25 bg-gray-100 rounded-lg overflow-hidden">
+        {prod.image_url && (
+          <img
+            src={prod.image_url}
+            className="w-full h-full object-cover"
+            alt={prod?.title}
+          />
+        )}
         <div className="btn absolute z-5 bottom-1 right-1 overflow-hidden">
           {productAlreadyInCart ? (
-            <div className="flex gap-2">
+            <div className="flex gap-1">
               <button
-                className="bg-amber-50 px-2 rounded cursor-pointer"
+                className=" bg-white px-2 rounded cursor-pointer"
                 onClick={handleRemoveProduct}
               >
                 -
               </button>
-              <div className="p">{localQuantiy}</div>
+              <div className=" bg-white px-2 font-medium  rounded">
+                {localQuantiy}
+              </div>
               <button
-                className="bg-amber-50 px-2 rounded cursor-pointer"
+                className=" bg-white px-2 rounded cursor-pointer"
                 onClick={handleBuyProduct}
               >
                 +
@@ -112,7 +117,7 @@ function SingleProductBox({ prod }) {
             </div>
           ) : (
             <button
-              className="cursor-pointer rounded bg-amber-50 px-2 "
+              className="cursor-pointer rounded-md bg-white px-2 "
               onClick={handleBuyProduct}
             >
               Buy

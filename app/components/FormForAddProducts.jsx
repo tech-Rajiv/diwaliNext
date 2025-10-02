@@ -3,11 +3,15 @@ import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import React, { useEffect, useState } from "react";
 import SelectCompForCatergory from "./addproductcomps/SelectCompForCatergory";
+import { Label } from "@/components/ui/label";
 
 function FormForAddProducts({
+  formData,
+  handleImageSelect,
   handleOnChangeOfInputs,
   submitTheForm,
   loading,
+  error,
 }) {
   const [selectData, setSelectData] = useState([]);
   const getAllCategoryIdToSendInSelect = async () => {
@@ -52,15 +56,25 @@ function FormForAddProducts({
         onChange={handleOnChangeOfInputs}
         name="available_stock"
       />
+
+      <Input
+        id="picture"
+        name="image"
+        type="file"
+        onChange={handleImageSelect}
+      />
+
       <SelectCompForCatergory
         handleOnChangeOfInputs={handleOnChangeOfInputs}
         selectData={selectData}
       />
+
       <div className="btn">
         <Button onClick={submitTheForm} disabled={loading}>
           {loading ? "please wait..." : "Add product"}
         </Button>
       </div>
+      {error && <p className=" text-red-400 text-sm">{error}</p>}
     </div>
   );
 }
