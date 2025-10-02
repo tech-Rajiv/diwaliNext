@@ -10,7 +10,6 @@ function AuthIntializer({ children }) {
       const res = await fetch("/api/me", {
         method: "POST",
       });
-      console.log(res, "resss");
       if (!res.ok) {
         throw new Error();
       }
