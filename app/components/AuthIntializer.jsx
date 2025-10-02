@@ -7,9 +7,10 @@ function AuthIntializer({ children }) {
   const dispatch = useDispatch();
   const callAndSetUserIfFound = async () => {
     try {
-      const res = await fetch("api/me", {
+      const res = await fetch("/api/me", {
         method: "POST",
       });
+      console.log(res, "resss");
       if (!res.ok) {
         throw new Error();
       }
@@ -18,7 +19,7 @@ function AuthIntializer({ children }) {
         loginSuccess({
           id: data?.user?.id,
           email: data?.user?.email,
-          token: data?.token ?? "",
+          token: data?.token,
         })
       );
     } catch (error) {}

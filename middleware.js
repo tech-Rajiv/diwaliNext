@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { jwtVerify } from "jose";
 
 const secret = new TextEncoder().encode(process.env.SECRET_KEY_JWT);
-const protectedRoutes = ["/addproductss"];
+const protectedRoutes = ["/addproducts"];
 
 export async function middleware(request) {
   const token = request.cookies.get("token")?.value;

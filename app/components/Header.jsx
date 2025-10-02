@@ -73,7 +73,7 @@ function Header() {
             Products
           </button>
           <button
-            className="contact cursor-pointer"
+            className={`contact cursor-pointer ${isLoggedIn ? "" : "hidden"}`}
             onClick={handleNavigateToAddProducts}
           >
             AddProduct
@@ -106,7 +106,7 @@ function Header() {
               Products
             </button>
             <button
-              className="contact cursor-pointer"
+              className={`contact cursor-pointer ${isLoggedIn ? "" : "hidden"}`}
               onClick={handleNavigateToAddProducts}
             >
               AddProduct

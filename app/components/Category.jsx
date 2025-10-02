@@ -8,10 +8,10 @@ function Category({ selectedCategoryId, setSelectedCategoryId }) {
 
   const fetchAllCategories = async () => {
     try {
-      const res = await fetch("/api/category");
+      const res = await fetch("/api/category/getcategories");
       if (!res.ok) throw new Error(res.statusText);
       const data = await res.json();
-      setAllCategories(data);
+      setAllCategories(data?.data);
     } catch (error) {
       setError(error?.message);
     } finally {
