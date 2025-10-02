@@ -88,7 +88,7 @@ function SingleProductBox({ prod }) {
   };
   return (
     <div className="">
-      <div className="img relative w-32 h-25 bg-gray-100 rounded-lg overflow-hidden">
+      <div className="img relative w-37 h-30 bg-gray-100 rounded-lg overflow-hidden">
         {prod.image_url && (
           <img
             src={prod.image_url}
