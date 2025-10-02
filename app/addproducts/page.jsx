@@ -33,6 +33,13 @@ function page() {
       const data = await res.json();
       console.log(data, "data");
       toast.success("added new product successfully");
+      setFormData({
+        title: "",
+        description: "",
+        price: "",
+        available_stock: "",
+        category_id: "",
+      });
     } catch (error) {
       toast.error("something went wrong");
     } finally {
