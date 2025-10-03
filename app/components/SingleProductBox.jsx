@@ -15,25 +15,25 @@ function SingleProductBox({ prod }) {
   useEffect(() => {
     overallProductsCart.products.forEach((element) => {
       if (element.product_id === prod.id) {
-        setLocalQuantity(element.quanity);
+        setLocalQuantity(element.quantity);
       }
     });
   }, [productAlreadyInCart]);
 
   const handleBuyProduct = () => {
-    const { category_id, id, price, title } = prod;
+    const { category_id, id, price, title, image_url } = prod;
     let updateProducts;
     if (productAlreadyInCart) {
       updateProducts = [...overallProductsCart.products].map((x) => {
         if (x.product_id === id) {
-          return { ...x, quanity: x.quanity + 1 };
+          return { ...x, quantity: x.quantity + 1 };
         }
         return x;
       });
     } else {
       updateProducts = [
         ...overallProductsCart.products,
-        { category_id, product_id: id, price, title, quanity: 1 },
+        { category_id, product_id: id, price, title, quantity: 1, image_url },
       ];
     }
     justUpdateTheStore(updateProducts);
@@ -49,7 +49,7 @@ function SingleProductBox({ prod }) {
     } else {
       updatedProducts = [...overallProductsCart.products].map((x) => {
         if (x.product_id === prod.id) {
-          return { ...x, quanity: x.quanity - 1 };
+          return { ...x, quantity: x.quantity - 1 };
         }
         return x;
       });
@@ -75,14 +75,14 @@ function SingleProductBox({ prod }) {
     console.log(array, "arr");
     let total = 0;
     array.forEach((x) => {
-      total += (x.price || 0) * (x.quanity || 0);
+      total += (x.price || 0) * (x.quantity || 0);
     });
     return total;
   };
   const getTotalQuantity = (array) => {
     let quantity = 0;
     array.forEach((x) => {
-      quantity += x.quanity;
+      quantity += x.quantity;
     });
     return quantity;
   };

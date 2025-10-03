@@ -4,6 +4,7 @@ import Category from "../components/Category";
 import ProductsShowComp from "../components/ProductsShowComp";
 import BannerToShowPrice from "../components/BannerToShowPrice";
 import ShowCartItems from "../components/ShowCartItems";
+import ShowCartWrapper from "../components/ShowCartWrapper";
 
 function page() {
   const [allProducts, setAllProducts] = useState();
@@ -29,7 +30,7 @@ function page() {
     fetchAllProducts(selectedCategoryId);
   }, [selectedCategoryId]);
   return (
-    <div className="flex flex-col gap-5 ">
+    <div className="flex flex-col gap-5 relative">
       <BannerToShowPrice />
       <div className="conatiner px-5 mt-5">
         <Category
@@ -42,6 +43,11 @@ function page() {
         loading={loading}
         allProducts={allProducts}
       />
+      <div className="w-full flex justify-center mx-auto bg-gray-200">
+        <div className="flying fixed bottom-10 ">
+          <ShowCartWrapper />
+        </div>
+      </div>
       {/* <ShowCartItems /> */}
     </div>
   );
