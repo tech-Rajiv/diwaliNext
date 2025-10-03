@@ -98,26 +98,40 @@ function SingleProductBox({ prod }) {
         )}
         <div className="btn absolute z-5 bottom-1 right-1 overflow-hidden">
           {productAlreadyInCart ? (
-            <div className="flex gap-1">
-              <button
-                className=" bg-white px-2 rounded cursor-pointer"
+            // <div className="flex  rounded-md bg-white text-[20px]">
+            /* {<button
+                className="px-2 cursor-pointer"
                 onClick={handleRemoveProduct}
               >
                 -
               </button>
-              <div className=" bg-white px-2  font-medium  rounded">
-                {localQuantiy}
-              </div>
+              <div className="  px-2  font-medium ">{localQuantiy}</div>
               <button
-                className=" bg-white px-2 rounded cursor-pointer"
+                className="px-2 cursor-pointer"
                 onClick={handleBuyProduct}
               >
                 +
-              </button>
+              </button> } */
+            <div className="mt-3 flex items-center justify-between text-[20px]">
+              <div className="flex items-center gap-1 bg-white rounded-full p-1">
+                <button
+                  onClick={handleRemoveProduct}
+                  className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100"
+                >
+                  −
+                </button>
+                <div className="px-1">{localQuantiy}</div>
+                <button
+                  onClick={handleBuyProduct}
+                  className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100"
+                >
+                  +
+                </button>
+              </div>
             </div>
           ) : (
             <button
-              className="cursor-pointer rounded-md font-medium bg-white px-2 "
+              className="cursor-pointer text-[20px] rounded-full font-medium bg-white px-4 py-1"
               onClick={handleBuyProduct}
             >
               Buy

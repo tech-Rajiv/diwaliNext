@@ -9,11 +9,17 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { DialogClose } from "@radix-ui/react-dialog";
-import React from "react";
+import React, { useState } from "react";
 
 function DialogBox({ name, onClickYesFn, heading, content, loading }) {
+  const [open, setOpen] = useState(false);
+
+  const handleYes = async () => {
+    await onClickYesFn();
+    setOpen(false);
+  };
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>{name}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -28,7 +34,7 @@ function DialogBox({ name, onClickYesFn, heading, content, loading }) {
             className={"cursor-pointer"}
             type="submit"
             disabled={loading}
-            onClick={onClickYesFn}
+            onClick={handleYes}
           >
             {loading ? "wait..." : "Yes"}
           </Button>

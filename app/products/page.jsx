@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Category from "../components/Category";
 import ProductsShowComp from "../components/ProductsShowComp";
 import BannerToShowPrice from "../components/BannerToShowPrice";
+import ShowCartItems from "../components/ShowCartItems";
 
 function page() {
   const [allProducts, setAllProducts] = useState();
@@ -41,6 +42,7 @@ function page() {
         loading={loading}
         allProducts={allProducts}
       />
+      {/* <ShowCartItems /> */}
     </div>
   );
 }

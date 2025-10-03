@@ -8,12 +8,21 @@ function SingleCategory({
   const handleChangeSelectedCategory = () => {
     setSelectedCategoryId(category.id);
   };
+  console.log(category, "category");
   return (
     <div className="">
-      <button
+      <div
         onClick={handleChangeSelectedCategory}
-        className={`w-15 h-15 flex justify-center cursor-pointer  rounded-lg items-center bg-gray-100`}
-      ></button>
+        className={`w-15 h-15 flex justify-center cursor-pointer  rounded-lg overflow-hidden items-center bg-gray-100`}
+      >
+        {category.image_url && (
+          <img
+            src={category.image_url}
+            className="w-full h-full object-cover"
+            alt={category.name}
+          />
+        )}
+      </div>
       <p
         className={`mt-2 text-center text-xs px-1 ${
           selectedCategoryId === category.id ? "" : "text-gray-400"
