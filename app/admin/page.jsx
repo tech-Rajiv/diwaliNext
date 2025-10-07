@@ -9,6 +9,7 @@ import {
   validaitonOfAllFieldsAreValid,
 } from "../helper/addProductHelpers";
 import { useRouter } from "next/navigation";
+import BackButton from "../components/uiByMe/BackButton";
 
 function page() {
   const [formData, setFormData] = useState({
@@ -64,20 +65,23 @@ function page() {
   };
 
   return (
-    <div className="px-5 mt-5">
-      <h2 className="text-center mb-5">Add New Product</h2>
-      {/* <ProtectedComponent> */}
-      <div className="wrapper max-w-lg mx-auto">
-        <FormForAddProducts
-          loading={loading}
-          formData={formData}
-          error={error}
-          handleOnChangeOfInputs={handleOnChangeOfInputs}
-          submitTheForm={submitTheForm}
-          handleImageSelect={handleImageSelect}
-        />
+    <div className="">
+      <BackButton />
+      <div className="wrapper px-5">
+        <h2 className="text-center mb-5">Add New Product</h2>
+        {/* <ProtectedComponent> */}
+        <div className="wrapper max-w-lg mx-auto">
+          <FormForAddProducts
+            loading={loading}
+            formData={formData}
+            error={error}
+            handleOnChangeOfInputs={handleOnChangeOfInputs}
+            submitTheForm={submitTheForm}
+            handleImageSelect={handleImageSelect}
+          />
+        </div>
+        {/* </ProtectedComponent> */}
       </div>
-      {/* </ProtectedComponent> */}
     </div>
   );
 }

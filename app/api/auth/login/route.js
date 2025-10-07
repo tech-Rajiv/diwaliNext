@@ -17,27 +17,17 @@ export async function POST(request) {
     }
 
     console.log("sending data to supabase", email, password);
-    // Supabase Auth login
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
 
     if (error) {
-      console.log("err h h ", error);
+      console.log("err", error);
       return NextResponse.json({ error: error.message }, { status: 401 });
     }
 
-    const secret = new TextEncoder().encode(process.env.SECRET_KEY_JWT);
-
-    const token = await new SignJWT({
-      id: data.user.id,
-      email: data.user.email,
-    })
-      .setProtectedHeader({ alg: "HS256" })
-      .setExpirationTime("10h") // expiry
-      .sign(secret);
-
+    const token = data.session.access_token;
     const res = NextResponse.json({
       user: {
         id: data.user.id,

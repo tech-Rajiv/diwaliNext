@@ -17,9 +17,9 @@ export default function ShowCartItems({ cartItems }) {
         </div>
       ) : (
         <ul className="space-y-3">
-          {cartItems.map((item) => (
+          {cartItems.map((item, index) => (
             <li
-              key={item.id}
+              key={index}
               className="flex items-center gap-4 p-3 rounded-2xl shadow-sm hover:shadow-md transition-shadow bg-white"
             >
               <img

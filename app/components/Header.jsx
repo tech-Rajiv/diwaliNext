@@ -14,11 +14,10 @@ function Header() {
   const router = useRouter();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const toggleDropdown = () => setShowDropdown((prev) => !prev);
-  const handleNaviagteToProducts = () => router.push("/products");
   const handleNavigateToHome = () => router.push("/");
   const handleNavigateToGuide = () => router.push("/guide");
   const handleNavigateToAdmin = () => router.push("/admin");
-  const handelNavigateToLogin = () => router.push("/auth/login");
+  const handelNavigateToLogin = () => router.push("/login");
   const handelLogout = async () => {
     setLoading(true);
     try {
@@ -67,12 +66,6 @@ function Header() {
         </div>
         <div className="routes hidden sm:flex gap-2 sm:gap-10 ">
           <button
-            className="Blog cursor-pointer"
-            onClick={handleNaviagteToProducts}
-          >
-            Products
-          </button>
-          <button
             className={`contact cursor-pointer ${isLoggedIn ? "" : "hidden"}`}
             onClick={handleNavigateToAdmin}
           >
@@ -99,12 +92,6 @@ function Header() {
       <div className="menu sm:hidden">
         {showDropdown && (
           <div className="routes flex flex-col items-start justify-center px-5 mt-5 gap-2">
-            <button
-              className="Blog cursor-pointer"
-              onClick={handleNaviagteToProducts}
-            >
-              Products
-            </button>
             <button
               className={`contact cursor-pointer ${isLoggedIn ? "" : "hidden"}`}
               onClick={handleNavigateToAdmin}
