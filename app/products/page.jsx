@@ -3,32 +3,19 @@ import React, { useEffect, useState } from "react";
 import Category from "../components/Category";
 import ProductsShowComp from "../components/ProductsShowComp";
 import BannerToShowPrice from "../components/BannerToShowPrice";
-import ShowCartItems from "../components/ShowCartItems";
 import ShowCartWrapper from "../components/ShowCartWrapper";
+import { useSelector } from "react-redux";
 
 function page() {
-  const [allProducts, setAllProducts] = useState();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const { products, loading, error } = useSelector(
+    (state) => state.allProducts
+  );
   const [selectedCategoryId, setSelectedCategoryId] = useState(2);
+  const allProducts = products.filter(
+    (x) => x.category_id === selectedCategoryId
+  );
+  const cartItems = useSelector((state) => state.addProducts.products);
 
-  const fetchAllProducts = async (categoryId) => {
-    setLoading(true);
-    try {
-      const res = await fetch(`/api/products?category_id=${categoryId}`);
-      if (!res.ok) throw new Error(res.statusText);
-      const data = await res.json();
-      setAllProducts(data);
-    } catch (error) {
-      setError(error?.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchAllProducts(selectedCategoryId);
-  }, [selectedCategoryId]);
   return (
     <div className="flex flex-col gap-5 relative">
       <BannerToShowPrice />
@@ -43,11 +30,16 @@ function page() {
         loading={loading}
         allProducts={allProducts}
       />
-      <div className="w-full flex justify-center mx-auto bg-gray-200">
-        <div className="flying fixed bottom-10 ">
-          <ShowCartWrapper />
+      {cartItems.length ? (
+        <div className="w-full flex justify-center mx-auto bg-gray-200">
+          <div className="flying fixed bottom-10 ">
+            <ShowCartWrapper />
+          </div>
         </div>
-      </div>
+      ) : (
+        ""
+      )}
+
       {/* <ShowCartItems /> */}
     </div>
   );

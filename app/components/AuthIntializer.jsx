@@ -25,7 +25,7 @@ function AuthIntializer({ children }) {
   };
   useEffect(() => {
     callAndSetUserIfFound();
-  });
+  }, []);
   return children;
 }
 

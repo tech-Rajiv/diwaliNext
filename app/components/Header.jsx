@@ -17,7 +17,7 @@ function Header() {
   const handleNaviagteToProducts = () => router.push("/products");
   const handleNavigateToHome = () => router.push("/");
   const handleNavigateToGuide = () => router.push("/guide");
-  const handleNavigateToAddProducts = () => router.push("/addproducts");
+  const handleNavigateToAdmin = () => router.push("/admin");
   const handelNavigateToLogin = () => router.push("/auth/login");
   const handelLogout = async () => {
     setLoading(true);
@@ -74,9 +74,9 @@ function Header() {
           </button>
           <button
             className={`contact cursor-pointer ${isLoggedIn ? "" : "hidden"}`}
-            onClick={handleNavigateToAddProducts}
+            onClick={handleNavigateToAdmin}
           >
-            AddProduct
+            Admin
           </button>
           <button
             className="about cursor-pointer"
@@ -107,7 +107,7 @@ function Header() {
             </button>
             <button
               className={`contact cursor-pointer ${isLoggedIn ? "" : "hidden"}`}
-              onClick={handleNavigateToAddProducts}
+              onClick={handleNavigateToAdmin}
             >
               AddProduct
             </button>

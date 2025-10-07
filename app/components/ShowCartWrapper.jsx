@@ -8,8 +8,8 @@ function ShowCartWrapper() {
     router.push("/cart-items");
   };
   return (
-    <div className="w-60 py-3 flex justify-center items-center rounded-full bg-gray-300">
-      <button className="" onClick={handleViewCart}>
+    <div className="px-5 py-3 flex justify-center items-center rounded-full bg-black/80 text-white ">
+      <button className="cursor-pointer" onClick={handleViewCart}>
         View Cart items
       </button>
     </div>

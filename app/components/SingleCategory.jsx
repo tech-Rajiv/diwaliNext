@@ -8,7 +8,6 @@ function SingleCategory({
   const handleChangeSelectedCategory = () => {
     setSelectedCategoryId(category.id);
   };
-  console.log(category, "category");
   return (
     <div className="">
       <div

@@ -1,28 +1,12 @@
 import React, { useEffect, useState } from "react";
 import SingleCategory from "./SingleCategory";
 import SkeletonForCategories from "./uiByMe/SkeletonForCategories";
+import { useSelector } from "react-redux";
 
 function Category({ selectedCategoryId, setSelectedCategoryId }) {
-  const [allCategories, setAllCategories] = useState();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  const fetchAllCategories = async () => {
-    try {
-      const res = await fetch("/api/category/getcategories");
-      if (!res.ok) throw new Error(res.statusText);
-      const data = await res.json();
-      setAllCategories(data?.data);
-    } catch (error) {
-      setError(error?.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-  useEffect(() => {
-    setLoading(true);
-    fetchAllCategories();
-  }, []);
+  const { allCategories, loading, error } = useSelector(
+    (state) => state.allProducts
+  );
 
   if (error) {
     return <p>{error}</p>;

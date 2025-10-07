@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import ReduxProvider from "./components/ReduxProvider";
 import { Toaster } from "@/components/ui/sonner";
 import AuthIntializer from "./components/AuthIntializer";
+import ProductsInitializer from "./components/ProductsInitializer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,11 +30,13 @@ export default function RootLayout({ children }) {
       >
         <ReduxProvider>
           <AuthIntializer>
-            <Toaster />
-            <Header />
-            <div className="main min-h-screen  max-w-7xl mx-auto">
-              {children}
-            </div>
+            <ProductsInitializer>
+              <Toaster />
+              <Header />
+              <div className="main min-h-screen  max-w-7xl mx-auto">
+                {children}
+              </div>
+            </ProductsInitializer>
           </AuthIntializer>
         </ReduxProvider>
         <Footer />
