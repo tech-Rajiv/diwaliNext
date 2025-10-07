@@ -3,10 +3,14 @@ import { ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-function BackButton() {
+function BackButton({ justOneStepBack }) {
   const router = useRouter();
   const handleBack = () => {
-    router.back();
+    if (!justOneStepBack) {
+      router.push("/");
+    } else {
+      router.back();
+    }
   };
   return (
     <div className="py-5">

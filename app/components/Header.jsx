@@ -96,7 +96,7 @@ function Header() {
               className={`contact cursor-pointer ${isLoggedIn ? "" : "hidden"}`}
               onClick={handleNavigateToAdmin}
             >
-              AddProduct
+              Admin
             </button>
             <button
               className="about cursor-pointer"

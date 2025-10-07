@@ -1,87 +1,42 @@
 "use client";
-import React, { useState } from "react";
-import FormForAddProducts from "../components/FormForAddProducts";
-import ProtectedComponent from "../components/ProtectedComponent";
-import AllCreatedProductByUser from "../components/AllCreatedProductByUser";
-import { toast } from "sonner";
+import React from "react";
 import {
-  getUrlFromCloudinary,
-  validaitonOfAllFieldsAreValid,
-} from "../helper/addProductHelpers";
-import { useRouter } from "next/navigation";
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemFooter,
+  ItemHeader,
+  ItemMedia,
+  ItemTitle,
+} from "@/components/ui/item";
+import { Button } from "@/components/ui/button";
+import { BadgeCheckIcon, ChevronRightIcon } from "lucide-react";
 import BackButton from "../components/uiByMe/BackButton";
-
+import { useRouter } from "next/navigation";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import AddProductComp from "../components/addproductcomps/AddProductComp";
+import EditAllProductsComponents from "../components/EditAllProductsComponents";
 function page() {
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    price: "",
-    available_stock: "",
-    category_id: "",
-  });
-  const [hasImage, setHasImage] = useState();
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const handleOnChangeOfInputs = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    setError();
-  };
-  const handleImageSelect = (e) => {
-    const file = e.target.files[0];
-    setHasImage(file);
-  };
-
-  const submitTheForm = async () => {
-    const hasError = validaitonOfAllFieldsAreValid(formData);
-    if (hasError) {
-      toast.error("all fields are required");
-      setError("all fields are required");
-      return;
-    }
-    setLoading(true);
-    const urlfromCloudinary = await getUrlFromCloudinary(hasImage);
-    const updatedFormData = { ...formData, image_url: urlfromCloudinary || "" };
-    console.log("updatedFormData: ", updatedFormData);
-
-    try {
-      const res = await fetch("/api/addproduct", {
-        method: "POST",
-        body: JSON.stringify(updatedFormData),
-      });
-      if (!res.ok) {
-        throw new Error();
-      }
-      const data = await res.json();
-      console.log(data, "data");
-      toast.success("added new product successfully");
-      router.push("/products");
-    } catch (error) {
-      toast.error("something went wrong");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
-    <div className="">
-      <BackButton />
-      <div className="wrapper px-5">
-        <h2 className="text-center mb-5">Add New Product</h2>
-        {/* <ProtectedComponent> */}
-        <div className="wrapper max-w-lg mx-auto">
-          <FormForAddProducts
-            loading={loading}
-            formData={formData}
-            error={error}
-            handleOnChangeOfInputs={handleOnChangeOfInputs}
-            submitTheForm={submitTheForm}
-            handleImageSelect={handleImageSelect}
-          />
-        </div>
-        {/* </ProtectedComponent> */}
-      </div>
+    <div className="flex justify-center w-full">
+      <Tabs defaultValue="account" className="mt-5 w-full flex flex-col gap-10">
+        <TabsList className="flex max-w-2xl mx-auto">
+          <TabsTrigger value="add-category">Add category</TabsTrigger>
+          <TabsTrigger value="add-product">Add product</TabsTrigger>
+          <TabsTrigger value="edit-product">Edit products</TabsTrigger>
+        </TabsList>
+        <TabsContent value="add-category">
+          Make changes to your account here.
+        </TabsContent>
+        <TabsContent value="add-product" className="max-w-3xl mx-auto">
+          <AddProductComp />
+        </TabsContent>
+        <TabsContent value="edit-product">
+          <EditAllProductsComponents />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }
