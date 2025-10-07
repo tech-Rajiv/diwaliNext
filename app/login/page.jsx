@@ -50,7 +50,7 @@ function page() {
         })
       );
       toast.success("Login successfull");
-      router.push("/");
+      router.replace("/");
     } catch (error) {
       setError(error?.message ?? "something went bad");
       toast.error(error.message);
