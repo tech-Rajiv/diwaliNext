@@ -6,7 +6,7 @@ import allProductsReducer from "./slices/allProductSlice";
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-    addProducts: addTocartReducers,
+    cartProducts: addTocartReducers,
     allProducts: allProductsReducer,
   },
 });

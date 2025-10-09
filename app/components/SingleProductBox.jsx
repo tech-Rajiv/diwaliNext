@@ -7,7 +7,7 @@ function SingleProductBox({ prod }) {
   const [localQuantiy, setLocalQuantity] = useState(0);
   const dispatch = useDispatch();
 
-  const overallProductsCart = useSelector((state) => state.addProducts);
+  const overallProductsCart = useSelector((state) => state.cartProducts);
   const productAlreadyInCart = overallProductsCart.products.find(
     (x) => x.product_id === prod.id
   );

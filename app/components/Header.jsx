@@ -62,7 +62,7 @@ function Header() {
           className="logo text-lg font-semibold cursor-pointer"
           onClick={handleNavigateToHome}
         >
-          Logo
+          DIWALISHOP
         </div>
         <div className="routes hidden sm:flex gap-2 sm:gap-10 ">
           <button

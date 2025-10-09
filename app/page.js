@@ -14,7 +14,7 @@ function page() {
   const allProducts = products.filter(
     (x) => x.category_id === selectedCategoryId
   );
-  const cartItems = useSelector((state) => state.addProducts.products);
+  const cartItems = useSelector((state) => state.cartProducts.products);
 
   return (
     <div className="flex flex-col gap-5 relative">

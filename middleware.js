@@ -8,7 +8,7 @@ const secret = new TextEncoder().encode(process.env.SUPABASE_JWT_SECRET);
 
 export async function middleware(request) {
   const token = request.cookies.get("token")?.value;
-  console.log("token: ", token);
+  console.log("middlleware run");
 
   const pathname = request.nextUrl.pathname;
 

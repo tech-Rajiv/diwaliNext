@@ -8,6 +8,7 @@ import {
 } from "../../helper/addProductHelpers";
 import { useRouter } from "next/navigation";
 import BackButton from "../../components/uiByMe/BackButton";
+import getProductHelpers from "@/app/helper/getProductHelpers";
 
 function AddProductComp() {
   const [formData, setFormData] = useState({
@@ -21,6 +22,9 @@ function AddProductComp() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+
+  //this is used to fecth new product if successfully added to products table bcz right now it is cached so i want to manually call this
+  const { fetchAllProducts, fetchAllCategories } = getProductHelpers();
   const handleOnChangeOfInputs = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -53,8 +57,10 @@ function AddProductComp() {
       }
       const data = await res.json();
       console.log(data, "data");
+      fetchAllProducts();
+      fetchAllCategories();
       toast.success("added new product successfully");
-      router.push("/products");
+      router.push("/");
     } catch (error) {
       toast.error("something went wrong");
     } finally {
