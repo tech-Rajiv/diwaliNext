@@ -18,6 +18,7 @@ function Header() {
   const handleNavigateToGuide = () => router.push("/guide");
   const handleNavigateToAdmin = () => router.push("/admin");
   const handelNavigateToLogin = () => router.push("/login");
+  const handleNAvigateToHistory = () => router.push("/history-order");
   const handelLogout = async () => {
     setLoading(true);
     try {
@@ -77,6 +78,12 @@ function Header() {
           >
             Guide
           </button>
+          <button
+            className="about cursor-pointer"
+            onClick={handleNAvigateToHistory}
+          >
+            Order History
+          </button>
         </div>
         <div className="IconOrBtn">
           <div className="iocnMenu sm:hidden">
@@ -97,6 +104,12 @@ function Header() {
               onClick={handleNavigateToAdmin}
             >
               Admin
+            </button>
+            <button
+              className="about cursor-pointer"
+              onClick={handleNAvigateToHistory}
+            >
+              Order History
             </button>
             <button
               className="about cursor-pointer"

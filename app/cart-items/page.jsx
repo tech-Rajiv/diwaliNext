@@ -7,7 +7,9 @@ import { Button } from "@/components/ui/button";
 
 function page() {
   const { products, total_price } = useSelector((state) => state.cartProducts);
-
+  const handleSaveOrder = () => {
+    console.log("saving cart", products);
+  };
   return (
     <div className="">
       <BackButton />
@@ -18,12 +20,14 @@ function page() {
           <CartLists product={prod} key={index} />
         ))}
         <div className="details flex  justify-between px-3 mt-4 border-t pt-4">
-          <div className="total flex">
+          <div className="total flex gap-1">
             <span>Total:</span>
-            <span>{total_price ? `${total_price} /-` : "No product"}</span>
+            <span className="font-semibold">
+              {total_price ? `${total_price} /-` : "No product"}
+            </span>
           </div>
           <div className="save">
-            <Button>Purchase</Button>
+            <Button onClick={handleSaveOrder}>Purchase</Button>
           </div>
         </div>
       </div>

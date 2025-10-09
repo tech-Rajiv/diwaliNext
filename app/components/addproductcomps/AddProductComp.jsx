@@ -2,13 +2,10 @@
 import React, { useState } from "react";
 import FormForAddProducts from "../../components/FormForAddProducts";
 import { toast } from "sonner";
-import {
-  getUrlFromCloudinary,
-  validaitonOfAllFieldsAreValid,
-} from "../../helper/addProductHelpers";
 import { useRouter } from "next/navigation";
 import BackButton from "../../components/uiByMe/BackButton";
 import getProductHelpers from "@/app/helper/getProductHelpers";
+import addProductHelpers from "@/app/helper/addProductHelpers";
 
 function AddProductComp() {
   const [formData, setFormData] = useState({
@@ -23,6 +20,8 @@ function AddProductComp() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  const { validaitonOfAllFieldsAreValid, compressedAndCloudinaryUrl } =
+    addProductHelpers();
   //this is used to fecth new product if successfully added to products table bcz right now it is cached so i want to manually call this
   const { fetchAllProducts, fetchAllCategories } = getProductHelpers();
   const handleOnChangeOfInputs = (e) => {
@@ -43,8 +42,8 @@ function AddProductComp() {
       return;
     }
     setLoading(true);
-    const urlfromCloudinary = await getUrlFromCloudinary(hasImage);
-    const updatedFormData = { ...formData, image_url: urlfromCloudinary || "" };
+    const urlToUpload = await compressedAndCloudinaryUrl(hasImage);
+    const updatedFormData = { ...formData, image_url: urlToUpload || "" };
     console.log("updatedFormData: ", updatedFormData);
 
     try {
