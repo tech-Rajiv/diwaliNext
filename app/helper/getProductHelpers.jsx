@@ -10,7 +10,6 @@ function getProductHelpers() {
       const res = await fetch(`/api/products`);
       if (!res.ok) throw new Error(res.statusText);
       const data = await res.json();
-      console.log("data all pro", data);
       dispatch(getProductsFromBE({ products: data?.data }));
     } catch (error) {
       dispatch(getProductsFromBE({ error: error.message }));
@@ -24,7 +23,6 @@ function getProductHelpers() {
       const res = await fetch("/api/category/getcategories");
       if (!res.ok) throw new Error(res.statusText);
       const data = await res.json();
-      console.log("data all cate", data);
       dispatch(getProductsFromBE({ allCategories: data?.data }));
     } catch (error) {
       dispatch(getProductsFromBE({ error: error.message }));

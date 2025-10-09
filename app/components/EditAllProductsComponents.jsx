@@ -29,7 +29,6 @@ function EditAllProductsComponents() {
         throw new Error();
       }
       const data = await res.json();
-      console.log(data);
       toast.success("product deleted successfully");
       fetchAllProducts();
     } catch (error) {

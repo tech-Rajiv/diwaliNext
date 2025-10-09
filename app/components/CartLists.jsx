@@ -5,31 +5,46 @@ import {
   ItemMedia,
   ItemTitle,
 } from "@/components/ui/item";
-import {
-  BadgeCheckIcon,
-  ChevronRightIcon,
-  Coins,
-  CoinsIcon,
-  Delete,
-  DeleteIcon,
-  Trash,
-} from "lucide-react";
+import { Trash } from "lucide-react";
 import React from "react";
+import Image from "next/image";
+import { useSelector } from "react-redux";
+import addToCartHelpers from "../helper/addToCartHelpers";
 
 function CartLists({ product }) {
-  console.log("product: ", product);
-
+  const { justUpdateTheStore } = addToCartHelpers();
+  const cartFromTheStore = useSelector((state) => state.cartProducts.products);
+  const handleDeleteProductFromCart = (prodId) => {
+    const updatedCart = cartFromTheStore.filter((x) => x.product_id !== prodId);
+    justUpdateTheStore(updatedCart);
+  };
   return (
     <div className="mb-2">
       <Item variant="muted" size="sm" asChild>
-        <div className="flex gap-5">
-          <ItemMedia>{product.quantity}X</ItemMedia>
+        <div className="flex gap-3">
+          <div className="w-12 h-12 rounded overflow-hidden">
+            <Image
+              src={product.image_url}
+              alt="itemImage"
+              height={100}
+              width={100}
+              className="w-full h-full object-cover"
+            />
+          </div>
           <ItemContent>
-            <ItemTitle>{product.title}</ItemTitle>
+            <ItemTitle className={"text-gray-800"}>
+              {product.title} ({product.quantity}x)
+            </ItemTitle>
           </ItemContent>
-          <ItemActions>{product.price * product.quantity}/-</ItemActions>
+          <ItemActions className={"font-semibold"}>
+            {product.price * product.quantity}/-
+          </ItemActions>
           <ItemActions>
-            <Trash strokeWidth={1.2} className="size-5" />
+            <Trash
+              strokeWidth={1.2}
+              className="size-5 cursor-pointer"
+              onClick={() => handleDeleteProductFromCart(product.product_id)}
+            />
           </ItemActions>
         </div>
       </Item>

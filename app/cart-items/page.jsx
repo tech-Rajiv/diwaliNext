@@ -6,19 +6,25 @@ import BackButton from "../components/uiByMe/BackButton";
 import { Button } from "@/components/ui/button";
 
 function page() {
-  const { products } = useSelector((state) => state.cartProducts);
+  const { products, total_price } = useSelector((state) => state.cartProducts);
 
   return (
     <div className="">
       <BackButton />
 
       <div className="wrapper px-2 max-w-xl mx-auto">
-        <h2 className="text-center font-medium mb-5">Cart Items</h2>
+        <h2 className="text-center font-medium mb-4">Cart Items:</h2>
         {products?.map((prod, index) => (
           <CartLists product={prod} key={index} />
         ))}
-        <div className="save mt-5 flex justify-end">
-          <Button>Save to history</Button>
+        <div className="details flex  justify-between px-3 mt-4 border-t pt-4">
+          <div className="total flex">
+            <span>Total:</span>
+            <span>{total_price ? `${total_price} /-` : "No product"}</span>
+          </div>
+          <div className="save">
+            <Button>Purchase</Button>
+          </div>
         </div>
       </div>
     </div>

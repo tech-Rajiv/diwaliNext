@@ -26,7 +26,6 @@ export const getUrlFromCloudinary = async (file) => {
   }
 
   const data = await res.json();
-  console.log("Cloudinary upload response:", data);
 
   return data.secure_url;
 };

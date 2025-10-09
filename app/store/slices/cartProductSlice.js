@@ -7,8 +7,8 @@ const initialState = {
   total_products_quantity: null,
 };
 
-export const authSlice = createSlice({
-  name: "addProducts",
+export const cartProducts = createSlice({
+  name: "cartProducts",
   initialState,
   reducers: {
     addProductToCart: (state, action) => {
@@ -20,5 +20,5 @@ export const authSlice = createSlice({
   },
 });
 
-export const { addProductToCart } = authSlice.actions;
-export default authSlice.reducer;
+export const { addProductToCart } = cartProducts.actions;
+export default cartProducts.reducer;

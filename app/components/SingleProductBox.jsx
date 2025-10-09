@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addProductToCart } from "../store/slices/addProductSlice";
+import { addProductToCart } from "../store/slices/cartProductSlice";
+import addToCartHelpers from "../helper/addToCartHelpers";
 
 function SingleProductBox({ prod }) {
-  const [added, setAdded] = useState(false);
   const [localQuantiy, setLocalQuantity] = useState(0);
   const dispatch = useDispatch();
 
   const overallProductsCart = useSelector((state) => state.cartProducts);
+  const { justUpdateTheStore } = addToCartHelpers();
   const productAlreadyInCart = overallProductsCart.products.find(
     (x) => x.product_id === prod.id
   );
@@ -58,34 +59,6 @@ function SingleProductBox({ prod }) {
     setLocalQuantity((prev) => prev - 1);
   };
 
-  const justUpdateTheStore = (updatedCart) => {
-    const updateProductsQuantity = updatedCart.length;
-    const updatedTotalPrice = getTotalPrice(updatedCart);
-    const updatedTotalproductsQuantity = getTotalQuantity(updatedCart);
-    dispatch(
-      addProductToCart({
-        products: updatedCart,
-        products_quantity: updateProductsQuantity,
-        total_price: updatedTotalPrice,
-        total_products_quantity: updatedTotalproductsQuantity,
-      })
-    );
-  };
-  const getTotalPrice = (array) => {
-    console.log(array, "arr");
-    let total = 0;
-    array.forEach((x) => {
-      total += (x.price || 0) * (x.quantity || 0);
-    });
-    return total;
-  };
-  const getTotalQuantity = (array) => {
-    let quantity = 0;
-    array.forEach((x) => {
-      quantity += x.quantity;
-    });
-    return quantity;
-  };
   return (
     <div className="">
       <div className="img relative w-35 h-35 bg-gray-100 rounded-lg overflow-hidden">
@@ -98,32 +71,18 @@ function SingleProductBox({ prod }) {
         )}
         <div className="btn absolute z-5 bottom-1 right-1 overflow-hidden">
           {productAlreadyInCart ? (
-            // <div className="flex  rounded-md bg-white text-[20px]">
-            /* {<button
-                className="px-2 cursor-pointer"
-                onClick={handleRemoveProduct}
-              >
-                -
-              </button>
-              <div className="  px-2  font-medium ">{localQuantiy}</div>
-              <button
-                className="px-2 cursor-pointer"
-                onClick={handleBuyProduct}
-              >
-                +
-              </button> } */
             <div className="mt-3 flex items-center justify-between text-[20px]">
               <div className="flex items-center gap-1 bg-white rounded-full p-1">
                 <button
                   onClick={handleRemoveProduct}
-                  className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100"
+                  className="w-7 h-7 cursor-pointer flex items-center justify-center rounded-full hover:bg-gray-100"
                 >
                   −
                 </button>
                 <div className="px-1">{localQuantiy}</div>
                 <button
                   onClick={handleBuyProduct}
-                  className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100"
+                  className="w-7 h-7 flex cursor-pointer items-center justify-center rounded-full hover:bg-gray-100"
                 >
                   +
                 </button>
