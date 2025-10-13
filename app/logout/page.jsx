@@ -1,6 +1,15 @@
-import React, { useEffect } from "react";
+"use client";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { logout } from "../store/slices/authSlice";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 function page() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const router = useRouter();
+  const dispatch = useDispatch();
   const handelLogout = async () => {
     setLoading(true);
     try {
@@ -15,6 +24,7 @@ function page() {
       toast.success("Logout successfull");
     } catch (error) {
       toast.error("something went wrong");
+      setError("failed to logout");
     } finally {
       setLoading(false);
     }
@@ -22,7 +32,12 @@ function page() {
   useEffect(() => {
     handelLogout();
   }, []);
-  return <div>logging you out...</div>;
+  if (loading) {
+    return "Logging you out..";
+  }
+  if (error) {
+    return "something went wrong: failed to logout";
+  }
 }
 
 export default page;

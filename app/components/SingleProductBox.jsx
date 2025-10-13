@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import addToCartHelpers from "../helper/addToCartHelpers";
+import { useRouter } from "next/navigation";
 
 function SingleProductBox({ prod }) {
   const [localQuantiy, setLocalQuantity] = useState(0);
-
   const overallProductsCart = useSelector((state) => state.cartProducts);
   const { justUpdateTheStore } = addToCartHelpers();
+  const router = useRouter();
   const productAlreadyInCart = overallProductsCart.products.find(
     (x) => x.product_id === prod.id
   );
@@ -65,13 +66,17 @@ function SingleProductBox({ prod }) {
     setLocalQuantity((prev) => prev - 1);
   };
 
+  const handleDynamicRouting = () => {
+    router.push(`/products/${prod.id}`);
+  };
   return (
     <div className="">
       <div className="img relative w-35 h-40 sm:h-35 bg-gray-100 rounded-lg overflow-hidden">
         {prod.image_url && (
           <img
+            onClick={handleDynamicRouting}
             src={prod.image_url}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover cursor-pointer"
             alt={prod?.title}
           />
         )}
