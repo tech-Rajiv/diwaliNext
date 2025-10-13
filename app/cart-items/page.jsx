@@ -1,14 +1,20 @@
 "use client";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CartLists from "../components/CartLists";
 import BackButton from "../components/uiByMe/BackButton";
 import { Button } from "@/components/ui/button";
+import { resetCart } from "../store/slices/cartProductSlice";
+import { useRouter } from "next/navigation";
 
 function page() {
   const { products, total_price } = useSelector((state) => state.cartProducts);
+  const dispatch = useDispatch();
+  const router = useRouter();
   const handleSaveOrder = () => {
     console.log("saving cart", products);
+    dispatch(resetCart());
+    router.replace("/");
   };
   return (
     <div className="">
@@ -27,7 +33,7 @@ function page() {
             </span>
           </div>
           <div className="save">
-            <Button onClick={handleSaveOrder}>Purchase</Button>
+            {total_price && <Button onClick={handleSaveOrder}>Purchase</Button>}
           </div>
         </div>
       </div>

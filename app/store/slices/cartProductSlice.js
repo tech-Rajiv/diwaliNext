@@ -17,8 +17,9 @@ export const cartProducts = createSlice({
       state.products_quantity = action.payload.products_quantity;
       state.total_products_quantity = action.payload.total_products_quantity;
     },
+    resetCart: () => initialState,
   },
 });
 
-export const { addProductToCart } = cartProducts.actions;
+export const { addProductToCart, resetCart } = cartProducts.actions;
 export default cartProducts.reducer;

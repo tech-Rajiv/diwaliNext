@@ -1,3 +1,4 @@
+"use client";
 import {
   Table,
   TableBody,
@@ -7,10 +8,22 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "sonner";
 import getProductHelpers from "../helper/getProductHelpers";
+import { Button } from "@/components/ui/button";
+import TableRowCustom from "./uiByMe/TableRowCustom";
 
 function EditAllProductsComponents() {
   const { loading, error, products } = useSelector(
@@ -28,7 +41,6 @@ function EditAllProductsComponents() {
       if (!res.ok) {
         throw new Error();
       }
-      const data = await res.json();
       toast.success("product deleted successfully");
       fetchAllProducts();
     } catch (error) {
@@ -37,38 +49,24 @@ function EditAllProductsComponents() {
       setDeleting(false);
     }
   };
+  if (error) {
+    return "error while getting all products";
+  }
   return (
-    <div>
-      <Table>
+    <div className="px-5">
+      <h2 className="font-medium text-center">All products</h2>
+      <Table className={""}>
         <TableCaption>A list of all products from your shop.</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Product_Id</TableHead>
-            <TableHead>Category_id</TableHead>
+            <TableHead className="w-[100px]">Id</TableHead>
             <TableHead>Title</TableHead>
-            <TableHead>Price</TableHead>
-            <TableHead>Image</TableHead>
-
             <TableHead>Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {products?.map((prod) => (
-            <TableRow key={prod.id}>
-              <TableCell className="font-medium">{prod.id}</TableCell>
-              <TableCell>{prod.category_id}</TableCell>
-              <TableCell>{prod.title}</TableCell>
-              <TableCell>{prod.price} rs</TableCell>
-              <TableCell>{prod.image_url ? "has image" : "no image"}</TableCell>
-              <TableCell>
-                <button
-                  disabled={deleting}
-                  onClick={() => handleDeleteProduct(prod.id)}
-                >
-                  {deleting ? "Deleting" : "Delete"}
-                </button>
-              </TableCell>
-            </TableRow>
+            <TableRowCustom prod={prod} key={prod?.id} />
           ))}
         </TableBody>
       </Table>

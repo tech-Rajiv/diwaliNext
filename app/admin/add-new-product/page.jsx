@@ -7,11 +7,12 @@ import BackButton from "../../components/uiByMe/BackButton";
 import getProductHelpers from "@/app/helper/getProductHelpers";
 import addProductHelpers from "@/app/helper/addProductHelpers";
 
-function AddProductComp() {
+function page() {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    price: "",
+    sell_price: "",
+    buy_price: "",
     available_stock: "",
     category_id: "",
   });
@@ -68,7 +69,8 @@ function AddProductComp() {
 
   return (
     <div className="">
-      <div className="wrapper px-5">
+      <BackButton justOneStepBack={true} />
+      <div className="wrapper px-5 max-w-xl mx-auto">
         <h2 className="text-center mb-3">Add New Product</h2>
         <div className="wrapper">
           <FormForAddProducts
@@ -85,4 +87,4 @@ function AddProductComp() {
   );
 }
 
-export default AddProductComp;
+export default page;

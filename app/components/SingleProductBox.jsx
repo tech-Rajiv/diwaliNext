@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addProductToCart } from "../store/slices/cartProductSlice";
+import { useSelector } from "react-redux";
+
 import addToCartHelpers from "../helper/addToCartHelpers";
 
 function SingleProductBox({ prod }) {
   const [localQuantiy, setLocalQuantity] = useState(0);
-  const dispatch = useDispatch();
 
   const overallProductsCart = useSelector((state) => state.cartProducts);
   const { justUpdateTheStore } = addToCartHelpers();
@@ -22,7 +21,7 @@ function SingleProductBox({ prod }) {
   }, [productAlreadyInCart]);
 
   const handleBuyProduct = () => {
-    const { category_id, id, price, title, image_url } = prod;
+    const { category_id, id, sell_price, title, image_url } = prod;
     let updateProducts;
     if (productAlreadyInCart) {
       updateProducts = [...overallProductsCart.products].map((x) => {
@@ -34,7 +33,14 @@ function SingleProductBox({ prod }) {
     } else {
       updateProducts = [
         ...overallProductsCart.products,
-        { category_id, product_id: id, price, title, quantity: 1, image_url },
+        {
+          category_id,
+          product_id: id,
+          sell_price,
+          title,
+          quantity: 1,
+          image_url,
+        },
       ];
     }
     justUpdateTheStore(updateProducts);
@@ -61,7 +67,7 @@ function SingleProductBox({ prod }) {
 
   return (
     <div className="">
-      <div className="img relative w-35 h-35 bg-gray-100 rounded-lg overflow-hidden">
+      <div className="img relative w-35 h-40 sm:h-35 bg-gray-100 rounded-lg overflow-hidden">
         {prod.image_url && (
           <img
             src={prod.image_url}
@@ -101,9 +107,9 @@ function SingleProductBox({ prod }) {
       <div className="infos text-sm p-1 flex flex-col gap-1 mt-1">
         <p>
           <span className="text-xs">Rs</span>
-          <span className="font-medium"> {prod?.price}</span>
+          <span className="font-semibold text-lg "> {prod?.sell_price}</span>
         </p>
-        <h2 className="">{prod?.title.slice(0, 17)}</h2>
+        <h2 className="font-medium">{prod?.title.slice(0, 17)}</h2>
         <p>
           <span className="text-xs">1ps</span>
         </p>

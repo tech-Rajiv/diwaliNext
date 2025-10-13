@@ -17,26 +17,17 @@ import { useRouter } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AddProductComp from "../components/addproductcomps/AddProductComp";
 import EditAllProductsComponents from "../components/EditAllProductsComponents";
+import SingleOutlineList from "../components/uiByMe/SingleOutlineList";
 function page() {
   const router = useRouter();
   return (
-    <div className="flex justify-center w-full">
-      <Tabs defaultValue="account" className="mt-5 w-full flex flex-col gap-10">
-        <TabsList className="flex max-w-2xl mx-auto">
-          <TabsTrigger value="add-category">Add category</TabsTrigger>
-          <TabsTrigger value="add-product">Add product</TabsTrigger>
-          <TabsTrigger value="edit-product">Edit products</TabsTrigger>
-        </TabsList>
-        <TabsContent value="add-category">
-          Make changes to your account here.
-        </TabsContent>
-        <TabsContent value="add-product" className="max-w-3xl mx-auto">
-          <AddProductComp />
-        </TabsContent>
-        <TabsContent value="edit-product">
-          <EditAllProductsComponents />
-        </TabsContent>
-      </Tabs>
+    <div className="px-5 max-w-xl mx-auto">
+      <h2 className="font-medium mt-5">Select what you want to do</h2>
+      <div className="flex flex-col gap-3 mt-5">
+        <SingleOutlineList name={"Add Category"} url={"add-new-category"} />
+        <SingleOutlineList name={"Add new product"} url={"add-new-product"} />
+        <SingleOutlineList name={"Edit products"} url={"edit-products"} />
+      </div>
     </div>
   );
 }

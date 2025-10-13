@@ -37,7 +37,7 @@ function CartLists({ product }) {
             </ItemTitle>
           </ItemContent>
           <ItemActions className={"font-semibold"}>
-            {product.price * product.quantity}/-
+            {product.sell_price * product.quantity}/-
           </ItemActions>
           <ItemActions>
             <Trash

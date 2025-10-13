@@ -11,7 +11,6 @@ function addProductHelpers() {
     return hasError;
   };
   const compressedAndCloudinaryUrl = async (imageFile) => {
-    console.log("originalFile instanceof Blob", imageFile instanceof Blob); // true
     console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
 
     const options = {
@@ -40,7 +39,6 @@ function addProductHelpers() {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", "diwali");
-
     const res = await fetch(
       `https://api.cloudinary.com/v1_1/db3uycxd3/image/upload`,
       {
@@ -51,9 +49,7 @@ function addProductHelpers() {
     if (!res.ok) {
       throw new Error("Failed to upload image to Cloudinary");
     }
-
     const data = await res.json();
-
     return data.secure_url;
   };
   return { compressedAndCloudinaryUrl, validaitonOfAllFieldsAreValid };

@@ -21,7 +21,7 @@ function addToCartHelpers() {
     console.log(array, "arr");
     let total = 0;
     array.forEach((x) => {
-      total += (x.price || 0) * (x.quantity || 0);
+      total += (x.sell_price || 0) * (x.quantity || 0);
     });
     return total;
   };
