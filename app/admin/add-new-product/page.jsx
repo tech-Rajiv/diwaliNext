@@ -15,6 +15,11 @@ function page() {
     buy_price: "",
     available_stock: "",
     category_id: "",
+    purchased_box: "",
+    purchased_from: "",
+    purchased_single_packets: "",
+    packet_per_box: "",
+    purchased_year: "",
   });
   const [hasImage, setHasImage] = useState();
   const [error, setError] = useState(false);
@@ -25,6 +30,7 @@ function page() {
     addProductHelpers();
   //this is used to fecth new product if successfully added to products table bcz right now it is cached so i want to manually call this
   const { fetchAllProducts, fetchAllCategories } = getProductHelpers();
+
   const handleOnChangeOfInputs = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
 import React, { useState } from "react";
+import { toast } from "sonner";
 
 function page() {
   const [input, setInput] = useState();
@@ -22,11 +23,10 @@ function page() {
       return;
     }
     setLoading(true);
-    // const urlfromCloudinary = await getUrlFromCloudinary(imageFile);
+    const urlfromCloudinary = await getUrlFromCloudinary(imageFile);
     const newCategory = {
       name: input,
-      image_url:
-        "https://res.cloudinary.com/db3uycxd3/image/upload/v1759492514/mif8idxcz59kkq9xe4ni.jpg",
+      image_url: urlfromCloudinary,
     };
     console.log(newCategory, "newCate");
     await createNewCategory(newCategory);

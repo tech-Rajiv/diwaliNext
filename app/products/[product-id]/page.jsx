@@ -11,9 +11,12 @@ import { useSelector } from "react-redux";
 export default function page() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [codeLoading, setCodeLoading] = useState(false);
+  const [codeError, setCodeError] = useState(false);
   const [prod, setProd] = useState();
   const params = useParams();
   const [code, setCode] = useState("");
+
   const [buyPrice, setBuyPrice] = useState();
   const id = params["product-id"];
   console.log("id: ", id);
@@ -35,10 +38,32 @@ export default function page() {
   }
   const handleCodeChange = (e) => {
     setCode(e.target.value);
+    codeError ? setCodeError("") : "";
   };
-  const handelShowCode = () => {
-    if (code === "cost") {
-      setShowCost(true);
+
+  const handleQueryCost = async () => {
+    if (!code) return;
+    setCodeLoading(true);
+    try {
+      const res = await fetch("/api/products/get-purchased-price", {
+        method: "POST",
+        body: JSON.stringify({ code, product_id: prod?.id }),
+      });
+      if (!res.ok) {
+        console.log(res);
+        if (res.status == 403) {
+          throw new Error("Invalid code please try again");
+        }
+        throw new Error("Something went wrong");
+      }
+      const data = await res.json();
+      console.log(data, "daaa");
+      setBuyPrice(data?.data?.buy_price);
+    } catch (error) {
+      console.log(error);
+      setCodeError(error.message);
+    } finally {
+      setCodeLoading(false);
     }
   };
   return (
@@ -63,6 +88,11 @@ export default function page() {
                 <span> rs</span>
               </div>
             </div>
+            <div className="d mt-1">
+              {prod.description} Lorem ipsum dolor sit, amet consectetur
+              adieleniti illo nemo quis consectetur. Atque amet aliquid culpa
+              iure cupiditate recusandae consequuntur qui animi consequatur?
+            </div>
 
             <h3 className="mt-8 sm:mt-12 font-semibold text-lg">
               Other details
@@ -75,7 +105,7 @@ export default function page() {
               <div className=" flex  gap-2">
                 <span className="font-medium">
                   {" "}
-                  Purchase boxes (kitna bandha) :
+                  Purchased boxes (kitna bandha) :
                 </span>
                 <span>{prod?.purchased_box} </span>
               </div>
@@ -110,17 +140,24 @@ export default function page() {
             </div>
           </div>
           <div className="inp mt-10 px-5">
-            <label htmlFor="code">Purchased price:</label>{" "}
-            <span>{buyPrice ? buyPrice : "no price"}</span>
+            <label htmlFor="code">Purchased price:</label>
+            {buyPrice && (
+              <span className="text-lg font-medium">{buyPrice} /-</span>
+            )}
+
             <div className="btn flex gap-2 mt-1">
               <Input
+                value={code}
                 onChange={handleCodeChange}
                 type={"text"}
                 id="code"
                 placeholder="Enter Code"
               />
-              <Button>Submit</Button>
+              <Button disabled={code ? false : true} onClick={handleQueryCost}>
+                {codeLoading ? "wait..." : "Submit"}
+              </Button>
             </div>
+            {codeError && <p className="text-sm text-red-500"> {codeError}</p>}
           </div>
         </div>
       )}
