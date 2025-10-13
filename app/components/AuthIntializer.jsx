@@ -7,11 +7,13 @@ function AuthIntializer({ children }) {
   const dispatch = useDispatch();
   const callAndSetUserIfFound = async () => {
     try {
-      const res = await fetch("/api/me", {
-        method: "POST",
-      });
+      const res = await fetch("/api/me");
+      console.log(res, "res");
       if (!res.ok) {
         throw new Error();
+      }
+      if (!res.ok) {
+        throw new Error("Authentcation. failed");
       }
       const data = await res.json();
       dispatch(
@@ -21,7 +23,9 @@ function AuthIntializer({ children }) {
           token: data?.token,
         })
       );
-    } catch (error) {}
+    } catch (error) {
+      console.log("auth failed by authInitializer");
+    }
   };
   useEffect(() => {
     callAndSetUserIfFound();

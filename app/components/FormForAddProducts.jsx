@@ -33,7 +33,7 @@ function FormForAddProducts({
     getAllCategoryIdToSendInSelect();
   }, [addedNewCategory]);
   return (
-    <div className="forms flex flex-col gap-5 py-5">
+    <div className="forms flex flex-col gap-5 py-5 mb-5">
       <div className="wrap flex flex-col gap-2">
         <Label htmlFor="image">Select Catgeory :</Label>
         <SelectCompForCatergory

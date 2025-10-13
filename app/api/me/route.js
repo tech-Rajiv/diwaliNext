@@ -1,12 +1,15 @@
 import { jwtVerify } from "jose";
 import { NextResponse } from "next/server";
 
-export async function POST(req) {
+export async function GET(req) {
   const token = req.cookies.get("token")?.value;
   console.log("tokkkk", token);
 
   if (!token) {
-    return NextResponse.json({ user: null }, { status: 401 });
+    return NextResponse.json(
+      { message: "No token in cokkies" },
+      { status: 401 }
+    );
   }
 
   try {
