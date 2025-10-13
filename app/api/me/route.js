@@ -1,8 +1,8 @@
 import { jwtVerify } from "jose";
 import { NextResponse } from "next/server";
 
-export async function GET(req) {
-  const token = req.cookies.get("token")?.value;
+export async function GET(request) {
+  const token = request.cookies.get("token")?.value;
   console.log("tokkkk", token);
 
   if (!token) {

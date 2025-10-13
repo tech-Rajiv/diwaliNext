@@ -5,6 +5,7 @@ const protectedRoutes = ["/admin"];
 const guestRoutes = ["/login"];
 
 const secret = new TextEncoder().encode(process.env.SUPABASE_JWT_SECRET);
+console.log("secret exists?", !!process.env.SUPABASE_JWT_SECRET);
 
 export async function middleware(request) {
   const token = request.cookies.get("token")?.value;
