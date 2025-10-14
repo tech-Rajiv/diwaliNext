@@ -1,5 +1,6 @@
 "use client";
 import BackButton from "@/app/components/uiByMe/BackButton";
+import addProductHelpers from "@/app/helper/addProductHelpers";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
@@ -11,8 +12,7 @@ function page() {
   const [imageFile, setImageFile] = useState();
   const [loading, setLoading] = useState();
   const [error, setError] = useState("");
-  const [open, setOpen] = useState(false);
-
+  const { compressedAndCloudinaryUrl } = addProductHelpers();
   const handleImageSelect = (e) => {
     const file = e.target.files[0];
     setImageFile(file);
@@ -23,14 +23,13 @@ function page() {
       return;
     }
     setLoading(true);
-    const urlfromCloudinary = await getUrlFromCloudinary(imageFile);
+    const urlfromCloudinary = await compressedAndCloudinaryUrl(imageFile);
     const newCategory = {
       name: input,
       image_url: urlfromCloudinary,
     };
     console.log(newCategory, "newCate");
     await createNewCategory(newCategory);
-    setOpen(false);
   };
 
   const createNewCategory = async (newCategory) => {
@@ -46,7 +45,6 @@ function page() {
       }
       console.log(res, "ressss");
       toast.success("Category added successfully");
-      setAddedNewCategory((prev) => !prev);
     } catch (error) {
       toast.error("failed to new category");
     } finally {
