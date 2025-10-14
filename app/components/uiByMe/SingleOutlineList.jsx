@@ -9,7 +9,7 @@ function SingleOutlineList({ name, url }) {
   };
   return (
     <div
-      className="outline rounded-xl cursor-pointer hover:bg-gray-50 p-2 flex justify-between items-center"
+      className="outline rounded-xl cursor-pointer hover:bg-gray-50 p-3 flex justify-between items-center"
       onClick={handleRouting}
     >
       <div className="info flex gap-2 items-center">

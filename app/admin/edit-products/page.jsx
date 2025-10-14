@@ -6,7 +6,8 @@ function page() {
   return (
     <div>
       <BackButton justOneStepBack={true} />
-      <div className="wrapper">
+      <h2 className="text-center font-medium">Edit product</h2>
+      <div className="wrapper mt-5 max-w-xl mx-auto">
         <EditAllProductsComponents />
       </div>
     </div>

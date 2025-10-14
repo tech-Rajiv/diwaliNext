@@ -1,22 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Item,
-  ItemActions,
-  ItemContent,
-  ItemDescription,
-  ItemFooter,
-  ItemHeader,
-  ItemMedia,
-  ItemTitle,
-} from "@/components/ui/item";
-import { Button } from "@/components/ui/button";
-import { BadgeCheckIcon, ChevronRightIcon } from "lucide-react";
-import BackButton from "../components/uiByMe/BackButton";
 import { useRouter } from "next/navigation";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import AddProductComp from "../components/addproductcomps/AddProductComp";
-import EditAllProductsComponents from "../components/EditAllProductsComponents";
 import SingleOutlineList from "../components/uiByMe/SingleOutlineList";
 function page() {
   const router = useRouter();

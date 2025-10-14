@@ -1,29 +1,9 @@
 "use client";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "sonner";
 import getProductHelpers from "../helper/getProductHelpers";
-import { Button } from "@/components/ui/button";
-import TableRowCustom from "./uiByMe/TableRowCustom";
+import SingleEditProductBox from "./uiByMe/SingleEditProductBox";
 
 function EditAllProductsComponents() {
   const { loading, error, products } = useSelector(
@@ -53,23 +33,12 @@ function EditAllProductsComponents() {
     return "error while getting all products";
   }
   return (
-    <div className="px-5">
-      <h2 className="font-medium text-center">All products</h2>
-      <Table className={""}>
-        <TableCaption>A list of all products from your shop.</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">Id</TableHead>
-            <TableHead>Title</TableHead>
-            <TableHead>Action</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {products?.map((prod) => (
-            <TableRowCustom prod={prod} key={prod?.id} />
-          ))}
-        </TableBody>
-      </Table>
+    <div className="">
+      <div className="wrap flex flex-col gap-2">
+        {products?.map((prod) => (
+          <SingleEditProductBox prod={prod} key={prod?.id} />
+        ))}
+      </div>
     </div>
   );
 }

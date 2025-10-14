@@ -1,92 +1,85 @@
 import {
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { TableCell, TableRow } from "@/components/ui/table";
 import React from "react";
-import { Drawer } from "vaul";
 
 function TableRowCustom({ prod }) {
   console.log(prod, "prod");
   return (
     <TableRow key={prod?.id}>
-      <TableCell className="font-medium">{prod?.id}</TableCell>
+      <TableCell className="">
+        <div className="div w-12 h-12 rounded-md bg-gray-300 overflow-hidden">
+          <img
+            src={prod?.image_url}
+            alt=""
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </TableCell>
       <TableCell>{prod?.title}</TableCell>
+      <TableCell className={"hidden sm:inline"}>
+        {prod?.available_stock}
+      </TableCell>
+      <TableCell className={"hidden sm:inline"}>
+        {prod?.purchased_single_packets ?? "no pcs"}
+      </TableCell>
       <TableCell>
         <div className="div">
           {
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button variant="outline">Edit</Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-80">
-                <div className="grid gap-4">
-                  <div className="space-y-2">
-                    <h4 className="leading-none font-medium">
-                      Prdouct details
-                    </h4>
-                    <p className="text-muted-foreground text-sm">
-                      Set the dimensions for the layer.
-                    </p>
+            <Sheet>
+              <SheetTrigger>
+                <div className="outline p-2 rounded-md cursor-pointer">
+                  Edit
+                </div>
+              </SheetTrigger>
+              <SheetContent>
+                <SheetHeader>
+                  <SheetTitle>Edit product</SheetTitle>
+                </SheetHeader>
+                <div className="grid flex-1 auto-rows-min gap-6 px-4">
+                  <div className="grid gap-3">
+                    <Label htmlFor="sheet-demo-name">Product Name :</Label>
+                    <Input id="sheet-demo-name" defaultValue={prod?.title} />
                   </div>
-                  <div className="grid gap-2">
-                    <div className="grid grid-cols-3 items-center gap-4">
-                      <Label htmlFor="name">Name</Label>
-                      <Input
-                        id="name"
-                        defaultValue={prod?.title}
-                        className="col-span-2 h-8"
-                      />
-                    </div>
-                    <div className="grid grid-cols-3 items-center gap-4">
-                      <Label htmlFor="maxWidth">Max. width</Label>
-                      <Input
-                        id="maxWidth"
-                        defaultValue="300px"
-                        className="col-span-2 h-8"
-                      />
-                    </div>
-                    <div className="grid grid-cols-3 items-center gap-4">
-                      <Label htmlFor="height">Height</Label>
-                      <Input
-                        id="height"
-                        defaultValue="25px"
-                        className="col-span-2 h-8"
-                      />
-                    </div>
-                    <div className="grid grid-cols-3 items-center gap-4">
-                      <Label htmlFor="maxHeight">Max. height</Label>
-                      <Input
-                        id="maxHeight"
-                        defaultValue="none"
-                        className="col-span-2 h-8"
-                      />
-                    </div>
+                  <div className="grid gap-3">
+                    <Label htmlFor="sheet-demo-username">Description :</Label>
+                    <Input
+                      id="sheet-demo-username"
+                      defaultValue={prod?.description}
+                    />
                   </div>
-                  <div className="btns">
-                    <div className="delete flex flex-col w-full gap-3 sm:flex-row">
-                      <Button variant={"destructive"} className="flex-1">
-                        Delete product
-                      </Button>
-                      <Button className="flex-1">Save changes</Button>
+                  <div className="grid gap-3">
+                    <Label htmlFor="sheet-demo-username">Image :</Label>
+                    <Input type={"file"} id="sheet-demo-username" />
+                    <div className="div w-25 h-25 rounded-md bg-gray-300 overflow-hidden">
+                      <img
+                        src={prod?.image_url}
+                        alt=""
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                   </div>
                 </div>
-              </PopoverContent>
-            </Popover>
+                <SheetFooter>
+                  <Button type="submit">Save changes</Button>
+                  <SheetClose asChild>
+                    <Button variant="outline">Close</Button>
+                  </SheetClose>
+                </SheetFooter>
+              </SheetContent>
+            </Sheet>
           }
         </div>
       </TableCell>
