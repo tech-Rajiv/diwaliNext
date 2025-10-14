@@ -12,7 +12,9 @@ function SingleCategory({
     <div className="">
       <div
         onClick={handleChangeSelectedCategory}
-        className={`w-15 h-15 flex justify-center cursor-pointer  rounded-lg overflow-hidden items-center bg-gray-100`}
+        className={`w-15 h-15 flex justify-center cursor-pointer rounded-lg overflow-hidden items-center bg-gray-100 ${
+          selectedCategoryId === category.id ? "shadow" : "opacity-90"
+        }`}
       >
         {category.image_url && (
           <img

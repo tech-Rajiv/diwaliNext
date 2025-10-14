@@ -14,7 +14,7 @@ function Category({ selectedCategoryId, setSelectedCategoryId }) {
   return (
     <div>
       <h2 className="font-medium">Products</h2>
-      <div className="all flex gap-5 mt-5">
+      <div className="all flex gap-5 mt-5 overflow-auto py-2  hide-scrollbar">
         {loading && <SkeletonForCategories />}
         {allCategories?.map((category, index) => (
           <div key={index}>
