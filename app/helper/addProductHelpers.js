@@ -30,9 +30,7 @@ function addProductHelpers() {
 
       const compressesUrl = await getUrlFromCloudinary(compressedFile);
       return compressesUrl;
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   const getUrlFromCloudinary = async (file) => {
     if (!file) return;

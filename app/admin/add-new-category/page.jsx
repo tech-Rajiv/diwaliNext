@@ -28,13 +28,10 @@ function page() {
       name: input,
       image_url: urlfromCloudinary,
     };
-    console.log(newCategory, "newCate");
     await createNewCategory(newCategory);
   };
 
   const createNewCategory = async (newCategory) => {
-    console.log("(newCategory: ", newCategory);
-
     try {
       const res = await fetch("/api/category/new-category", {
         method: "POST",
@@ -43,7 +40,6 @@ function page() {
       if (!res.ok) {
         throw new Error();
       }
-      console.log(res, "ressss");
       toast.success("Category added successfully");
     } catch (error) {
       toast.error("failed to new category");

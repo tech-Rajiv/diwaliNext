@@ -4,9 +4,7 @@ const { NextResponse } = require("next/server");
 
 export async function POST(request) {
   const body = await request.json();
-  console.log("body : ", body);
   const { name, image_url } = body;
-  console.log("name, image_url: ", name, image_url);
   try {
     const { data, error } = await supabase
       .from("category")

@@ -54,7 +54,7 @@ function AddProductComp() {
         throw new Error();
       }
       const data = await res.json();
-      console.log(data, "data");
+
       fetchAllProducts();
       fetchAllCategories();
       toast.success("added new product successfully");

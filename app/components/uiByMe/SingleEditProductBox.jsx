@@ -4,7 +4,7 @@ import React from "react";
 
 function SingleEditProductBox({ prod }) {
   const router = useRouter();
-  console.log(prod, "proddddd");
+
   return (
     <div className="bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 py-2 px-5 flex justify-between items-center">
       <div className="info flex gap-2 items-center">

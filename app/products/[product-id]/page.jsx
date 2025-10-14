@@ -4,13 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Info } from "lucide-react";
+import Image from "next/image";
 import { useParams, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function page() {
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
   const [codeLoading, setCodeLoading] = useState(false);
   const [codeError, setCodeError] = useState(false);
   const [prod, setProd] = useState();
@@ -19,9 +19,9 @@ export default function page() {
 
   const [buyPrice, setBuyPrice] = useState();
   const id = params["product-id"];
-  console.log("id: ", id);
+
   const allProducts = useSelector((state) => state.allProducts?.products);
-  console.log(allProducts, "aaa");
+
   useEffect(() => {
     const product = allProducts.find((x) => x?.id == id);
     if (product) {
@@ -29,13 +29,11 @@ export default function page() {
       setProd(product);
     }
   }, [id, allProducts]);
-  console.log(prod, "prod");
+
   if (loading) {
     return "Loading...";
   }
-  if (error) {
-    return "Cannot find any product";
-  }
+
   const handleCodeChange = (e) => {
     setCode(e.target.value);
     codeError ? setCodeError("") : "";
@@ -50,17 +48,15 @@ export default function page() {
         body: JSON.stringify({ code, product_id: prod?.id }),
       });
       if (!res.ok) {
-        console.log(res);
         if (res.status == 403) {
           throw new Error("Invalid code please try again");
         }
         throw new Error("Something went wrong");
       }
       const data = await res.json();
-      console.log(data, "daaa");
+
       setBuyPrice(data?.data?.buy_price);
     } catch (error) {
-      console.log(error);
       setCodeError(error.message);
     } finally {
       setCodeLoading(false);
@@ -72,9 +68,11 @@ export default function page() {
       {prod && (
         <div className="prod py-5 sm:max-w-2xl mx-auto">
           <div className="imageWrapper mx-auto sm:outline w-full sm:px-50 px-5 sm:p-0 rounded-xl h-96">
-            <img
+            <Image
               src={prod?.image_url}
-              alt="image"
+              alt="product image"
+              width={400}
+              height={400}
               className="mx-auto w-full h-full object-cover rounded-xl sm:rounded-none"
             />
           </div>

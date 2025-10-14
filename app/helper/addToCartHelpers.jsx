@@ -18,7 +18,6 @@ function addToCartHelpers() {
     );
   };
   const getTotalPrice = (array) => {
-    console.log(array, "arr");
     let total = 0;
     array.forEach((x) => {
       total += (x.sell_price || 0) * (x.quantity || 0);

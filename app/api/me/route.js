@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 
 export async function GET(request) {
   const token = request.cookies.get("token")?.value;
-  console.log("tokkkk", token);
 
   if (!token) {
     return NextResponse.json(
@@ -17,7 +16,6 @@ export async function GET(request) {
     const { payload } = await jwtVerify(token, secret);
     return NextResponse.json({ user: payload, token });
   } catch (err) {
-    console.log("Token verification failed:", err.message);
     return NextResponse.json({ user: null }, { status: 401 });
   }
 }

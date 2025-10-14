@@ -11,6 +11,7 @@ function page() {
         <SingleOutlineList name={"Add Category"} url={"add-new-category"} />
         <SingleOutlineList name={"Add new product"} url={"add-new-product"} />
         <SingleOutlineList name={"Edit products"} url={"edit-products"} />
+        <SingleOutlineList name={"Insights"} url={"insights"} />
       </div>
     </div>
   );

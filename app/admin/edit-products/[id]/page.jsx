@@ -34,7 +34,6 @@ function page() {
         method: "DELETE",
         body: JSON.stringify({ product_id: id }),
       });
-      console.log(res, "res");
       if (!res.ok) {
         throw new Error();
       }
@@ -55,7 +54,6 @@ function page() {
     }
     setLoading((prev) => ({ ...prev, submitLoading: true }));
     try {
-      console.log("started");
       let updatedFormData;
       if (changedImage) {
         const urlToUpload = await compressedAndCloudinaryUrl(hasImage);
@@ -64,7 +62,6 @@ function page() {
       } else {
         updatedFormData = { ...formData };
       }
-      console.log(updatedFormData, "updateeed");
       const res = await fetch("/api/edit-product", {
         method: "PUT",
         body: JSON.stringify(updatedFormData),
@@ -73,7 +70,6 @@ function page() {
         throw new Error();
       }
       const data = await res.json();
-      console.log(data, "data");
       fetchAllProducts();
       fetchAllCategories();
       toast.success("Updated product successfully");

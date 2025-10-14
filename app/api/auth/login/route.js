@@ -16,14 +16,12 @@ export async function POST(request) {
       );
     }
 
-    console.log("sending data to supabase", email, password);
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
 
     if (error) {
-      console.log("err", error);
       return NextResponse.json({ error: error.message }, { status: 401 });
     }
 

@@ -6,15 +6,15 @@ import BackButton from "../components/uiByMe/BackButton";
 import { Button } from "@/components/ui/button";
 import { resetCart } from "../store/slices/cartProductSlice";
 import { useRouter } from "next/navigation";
+import helper from "./helper";
 
 function page() {
-  const { products, total_price } = useSelector((state) => state.cartProducts);
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const handleSaveOrder = () => {
-    console.log("saving cart", products);
-    dispatch(resetCart());
-    router.replace("/");
+  const { products, total_price, total_products_quantity } = useSelector(
+    (state) => state.cartProducts
+  );
+  const { handleSaveOrder } = helper();
+  const handleSubmit = () => {
+    handleSaveOrder({ products, total_price, total_products_quantity });
   };
   return (
     <div className="">
@@ -33,7 +33,7 @@ function page() {
             </span>
           </div>
           <div className="save">
-            {total_price && <Button onClick={handleSaveOrder}>Purchase</Button>}
+            {total_price && <Button onClick={handleSubmit}>Purchase</Button>}
           </div>
         </div>
       </div>

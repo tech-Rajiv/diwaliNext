@@ -32,7 +32,7 @@ function DialogBoxWithInput({ name, onClickYesFn, heading, content }) {
       image_url:
         "https://res.cloudinary.com/db3uycxd3/image/upload/v1759492514/mif8idxcz59kkq9xe4ni.jpg",
     };
-    console.log(newCategory, "newCate");
+
     await onClickYesFn(newCategory, setLoading);
     setOpen(false);
   };

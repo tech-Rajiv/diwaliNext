@@ -8,7 +8,7 @@ function AuthIntializer({ children }) {
   const callAndSetUserIfFound = async () => {
     try {
       const res = await fetch("/api/me");
-      console.log(res, "res");
+
       if (!res.ok) {
         throw new Error();
       }

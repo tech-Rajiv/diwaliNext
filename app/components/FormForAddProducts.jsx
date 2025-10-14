@@ -19,16 +19,12 @@ function FormForAddProducts({
     try {
       const res = await fetch("/api/addproduct/getcategoriesarray");
       if (!res.ok) {
-        console.log("error while getting all categories");
       }
       const data = await res.json();
       setSelectData(data?.data);
-    } catch (error) {
-      console.log("hadd catch error");
-    }
+    } catch (error) {}
   };
 
-  console.log(formData, "formadat");
   useEffect(() => {
     getAllCategoryIdToSendInSelect();
   }, [addedNewCategory]);

@@ -6,7 +6,7 @@ export const POST = async (request) => {
   const body = await request.json();
   const { code, product_id } = body;
   const key = process.env.CODE_KEY;
-  console.log(key, code);
+
   if (key != code) {
     return NextResponse.json(
       { success: false, message: "Invalid code" },

@@ -35,14 +35,11 @@ export async function POST(request) {
       },
     ]);
     if (error) {
-      console.error("Supabase insert error:", error);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    console.log("Inserted product:", data);
     return NextResponse.json({ msg: "Product added successfully", data });
   } catch (error) {
-    console.error("API error:", err);
     return NextResponse.json(
       { error: "Something went wrong" },
       { status: 500 }

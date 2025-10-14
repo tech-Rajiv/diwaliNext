@@ -5,7 +5,6 @@ const protectedRoutes = ["/admin"];
 const guestRoutes = ["/login"];
 
 const secret = new TextEncoder().encode(process.env.SUPABASE_JWT_SECRET);
-console.log("secret exists?", !!process.env.SUPABASE_JWT_SECRET);
 
 export async function middleware(request) {
   const token = request.cookies.get("token")?.value;
@@ -18,10 +17,8 @@ export async function middleware(request) {
   );
 
   if (isProtected) {
-    console.log("isprotected");
     try {
       const { payload } = await jwtVerify(token, secret);
-      console.log("payload: ", payload);
       return NextResponse.next();
     } catch (err) {
       return NextResponse.redirect(new URL("/", request.url));
@@ -30,7 +27,6 @@ export async function middleware(request) {
 
   const isForGuest = guestRoutes.some((route) => pathname.startsWith(route));
   if (isForGuest) {
-    console.log("isforguest");
     if (!token) {
       return NextResponse.next();
     } else {

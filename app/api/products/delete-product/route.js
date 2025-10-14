@@ -13,8 +13,6 @@ export async function DELETE(request) {
       );
     }
 
-    console.log("Deleting product with ID:", product_id);
-
     const { data, error } = await supabase
       .from("products")
       .delete()
@@ -22,7 +20,6 @@ export async function DELETE(request) {
       .select();
 
     if (error) {
-      console.error("Supabase delete error:", error.message);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
@@ -38,7 +35,6 @@ export async function DELETE(request) {
       deleted: data[0],
     });
   } catch (err) {
-    console.error("Server error:", err);
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 }

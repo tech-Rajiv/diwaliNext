@@ -16,7 +16,6 @@ import { TableCell, TableRow } from "@/components/ui/table";
 import React from "react";
 
 function TableRowCustom({ prod }) {
-  console.log(prod, "prod");
   return (
     <TableRow key={prod?.id}>
       <TableCell className="">
