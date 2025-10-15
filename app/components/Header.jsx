@@ -18,7 +18,7 @@ function Header() {
   const handleNavigateToGuide = () => router.push("/guide");
   const handleNavigateToAdmin = () => router.push("/admin");
   const handelNavigateToLogin = () => router.push("/login");
-  const handleNAvigateToHistory = () => router.push("/history-order");
+  const handleNAvigateToHistory = () => router.push("/orders");
   const handelLogout = async () => {
     setLoading(true);
     try {
@@ -79,10 +79,10 @@ function Header() {
             Guide
           </button>
           <button
-            className="about cursor-pointer"
+            className={`contact cursor-pointer ${isLoggedIn ? "" : "hidden"}`}
             onClick={handleNAvigateToHistory}
           >
-            Order History
+            Orders
           </button>
         </div>
         <div className="IconOrBtn">
@@ -106,7 +106,7 @@ function Header() {
               Admin
             </button>
             <button
-              className="about cursor-pointer"
+              className={`contact cursor-pointer ${isLoggedIn ? "" : "hidden"}`}
               onClick={handleNAvigateToHistory}
             >
               Order History

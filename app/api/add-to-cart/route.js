@@ -23,18 +23,26 @@ export async function POST(request) {
     }
 
     // Call your RPC
-    const { data, error } = await supabase.rpc("create_order_with_items", {
+    const { error } = await supabase.rpc("create_order_with_items", {
       p_by_admin: email,
       p_customer_name: "rajiv",
       p_items: products,
     });
-    if (error) throw error;
-    console.log(data, "datattatatat");
-    return NextResponse.json({ msg: "Order created successfully" });
-  } catch (error) {
+    if (error) {
+      console.error("Supabase RPC error:", error);
+      throw new Error(error.message || "Failed to create order");
+    }
+
     return NextResponse.json(
-      { msg: error?.message || "inavlid token" },
-      { status: 401 }
+      { message: "Order created successfully" },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error in route:", error.message);
+
+    return NextResponse.json(
+      { message: error.message || "Something went wrong" },
+      { status: 500 }
     );
   }
 }

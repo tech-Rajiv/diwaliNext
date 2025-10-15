@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { jwtVerify } from "jose";
 
-const protectedRoutes = ["/admin"];
+const protectedRoutes = ["/admin", "/orders"];
 const guestRoutes = ["/login"];
 
 const secret = new TextEncoder().encode(process.env.SUPABASE_JWT_SECRET);
@@ -21,7 +21,7 @@ export async function middleware(request) {
       const { payload } = await jwtVerify(token, secret);
       return NextResponse.next();
     } catch (err) {
-      return NextResponse.redirect(new URL("/", request.url));
+      return NextResponse.redirect(new URL("/login", request.url));
     }
   }
 

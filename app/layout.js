@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
         <ReduxProvider>
           <AuthIntializer>
             <ProductsInitializer>
-              <Toaster />
+              <Toaster position="top-center" />
               <Header />
               <div className="main min-h-screen  max-w-7xl mx-auto">
                 {children}

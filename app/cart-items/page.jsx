@@ -6,15 +6,38 @@ import BackButton from "../components/uiByMe/BackButton";
 import { Button } from "@/components/ui/button";
 import { resetCart } from "../store/slices/cartProductSlice";
 import { useRouter } from "next/navigation";
-import helper from "./helper";
+import { handleSaveOrder } from "./helper";
+import { toast } from "sonner";
+import OrderCreatedSuccessfully from "../components/uiByMe/OrderCreatedSuccessfully";
 
 function page() {
   const { products, total_price, total_products_quantity } = useSelector(
     (state) => state.cartProducts
   );
-  const { handleSaveOrder } = helper();
-  const handleSubmit = () => {
-    handleSaveOrder({ products, total_price, total_products_quantity });
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const handleSubmit = async () => {
+    const saved = await handleSaveOrder({
+      products,
+      total_price,
+      total_products_quantity,
+    });
+
+    if (saved.success) {
+      dispatch(resetCart());
+      toast.success("Order placed");
+      router.push("/orders/order-successfull");
+      return;
+    }
+
+    if (saved.error === 401) {
+      toast.error("Please login to continue");
+      router.push("/login");
+      return;
+    }
+
+    console.log("❌ Order failed:", saved.message);
+    toast.error(saved?.message ?? "something went wrong");
   };
   return (
     <div className="">
