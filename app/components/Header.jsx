@@ -3,9 +3,10 @@ import { LogIn, LogOut, Menu, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../store/slices/authSlice";
+import { loggingOut, logout } from "../store/slices/authSlice";
 import DialogBox from "./DialogBox";
 import { toast } from "sonner";
+import { removingStore } from "../store/slices/storeSlice";
 
 function Header() {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -31,7 +32,8 @@ function Header() {
       if (!res.ok) {
         throw new Error();
       }
-      dispatch(logout());
+      dispatch(loggingOut());
+      dispatch(removingStore());
       router.push("/");
       toast.success("Logout successfull");
     } catch (error) {

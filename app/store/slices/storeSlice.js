@@ -54,6 +54,8 @@ export const storeDetails = createSlice({
       state.allCategories.loading = false;
       state.allCategories.error = action.payload;
     },
+
+    removingStore: () => initialState,
   },
 });
 
@@ -66,6 +68,7 @@ export const {
   fetchCategoriesStart,
   fetchCategoriesSuccess,
   fetchCategoriesFailure,
+  removingStore,
 } = storeDetails.actions;
 
 export default storeDetails.reducer;

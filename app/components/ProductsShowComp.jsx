@@ -9,7 +9,6 @@ function ProductsShowComp() {
     (state) => state.store.allProducts
   );
 
-  console.log("prdcyutstsjh", products, loading, error);
   if (loading) {
     return <SkeletonShowCards />;
   }

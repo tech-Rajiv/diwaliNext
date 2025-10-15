@@ -16,9 +16,7 @@ import { toast } from "sonner";
 
 function AuthIntializer({ children }) {
   const dispatch = useDispatch();
-  const [userId, setUserId] = useState();
-  const [shopId, setShopId] = useState();
-  const { fetchAllProducts, fetchAllCategories } = getProductHelpers();
+  const userId = useSelector((state) => state?.auth?.id);
   const callAndSetUserIfFound = async () => {
     try {
       const res = await fetch("/api/me");
@@ -37,7 +35,6 @@ function AuthIntializer({ children }) {
           token: data?.token,
         })
       );
-      setUserId(data?.user?.sub);
     } catch (error) {
       //call products and show dummy store.
       console.log("auth failed by authInitializer");
@@ -56,7 +53,7 @@ function AuthIntializer({ children }) {
         throw Error;
       }
       const data = await res.json();
-      console.log("data: ", data);
+
       dispatch(setStoreName(data?.shopDetails?.working_shop_name));
       dispatch(setStoreId(data?.shopDetails?.working_shop_name));
       dispatch(fetchProductsSuccess(data?.productData));
@@ -68,19 +65,10 @@ function AuthIntializer({ children }) {
   };
 
   useEffect(() => {
-    if (shopId) {
-      console.log("if shop ids");
-      // fetchAllProducts(shopId);
-      // fetchAllCategories(shopId);
-    }
-  }, [shopId]);
-
-  useEffect(() => {
     if (userId) {
       getStoreDetails(userId);
     }
   }, [userId]);
-
   useEffect(() => {
     callAndSetUserIfFound();
   }, []);

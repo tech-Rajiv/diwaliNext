@@ -17,9 +17,9 @@ function getProductHelpers() {
         body: JSON.stringify({ shopId }),
       });
       if (!res.ok) throw new Error(res.statusText);
-      console.log(res, "resss");
+
       const data = await res.json();
-      console.log("data: of allfetched produts", data?.data);
+
       dispatch(fetchProductsSuccess(data?.data));
     } catch (error) {
       dispatch(fetchProductsFailure(error.message));
@@ -33,9 +33,9 @@ function getProductHelpers() {
         body: JSON.stringify({ categoryId }),
       });
       if (!res.ok) throw new Error(res.statusText);
-      console.log(res, "resss");
+
       const data = await res.json();
-      console.log("data: of allfetched produts", data?.data);
+
       dispatch(fetchProductsSuccess(data?.data));
     } catch (error) {
       dispatch(fetchProductsFailure(error.message));

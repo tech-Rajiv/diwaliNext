@@ -24,7 +24,7 @@ export async function POST(request) {
 
     // Call your RPC
     const { error } = await supabase.rpc("create_order_with_items", {
-      p_by_admin: email,
+      p_by_admin: userId,
       p_customer_name: "rajiv",
       p_items: products,
     });

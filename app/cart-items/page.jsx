@@ -40,7 +40,6 @@ function page() {
       return;
     }
 
-    console.log("❌ Order failed:", saved.message);
     toast.error(saved?.message ?? "something went wrong");
   };
   return (
