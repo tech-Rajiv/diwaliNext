@@ -13,6 +13,9 @@ function Header() {
   const dispatch = useDispatch();
   const router = useRouter();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const { storeName } = useSelector((state) => state.store);
+  const dummyStore = useSelector((state) => state.dummyStore);
+
   const toggleDropdown = () => setShowDropdown((prev) => !prev);
   const handleNavigateToHome = () => router.push("/");
   const handleNavigateToGuide = () => router.push("/guide");
@@ -56,6 +59,7 @@ function Header() {
       Login <LogIn size={22} />
     </button>
   );
+
   return (
     <header className="shadow py-5 ">
       <div className="nav sm:px-10 px-5 flex justify-between">
@@ -63,7 +67,7 @@ function Header() {
           className="logo text-lg font-semibold cursor-pointer"
           onClick={handleNavigateToHome}
         >
-          DIWALISHOP
+          {storeName ? storeName : dummyStore.storeName}
         </div>
         <div className="routes hidden sm:flex gap-2 sm:gap-10 ">
           <button

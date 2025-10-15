@@ -1,20 +1,19 @@
 import React from "react";
+import getProductHelpers from "../helper/getProductHelpers";
 
-function SingleCategory({
-  category,
-  setSelectedCategoryId,
-  selectedCategoryId,
-}) {
-  const handleChangeSelectedCategory = () => {
-    setSelectedCategoryId(category.id);
+function SingleCategory({ category }) {
+  const { fetchProductsByCategory } = getProductHelpers();
+  const handleChangeSelectedCategory = (id) => {
+    if (!id) {
+      return console.log("no cateid to fetch");
+    }
+    fetchProductsByCategory(id);
   };
   return (
     <div className="">
       <div
-        onClick={handleChangeSelectedCategory}
-        className={`w-15 h-15 flex justify-center cursor-pointer rounded-lg overflow-hidden items-center bg-gray-100 ${
-          selectedCategoryId === category.id ? "shadow" : "opacity-90"
-        }`}
+        onClick={() => handleChangeSelectedCategory(category?.id)}
+        className={`w-15 h-15 flex justify-center cursor-pointer rounded-lg overflow-hidden items-center bg-gray-100 `}
       >
         {category.image_url && (
           <img
@@ -24,11 +23,7 @@ function SingleCategory({
           />
         )}
       </div>
-      <p
-        className={`mt-2 text-center text-xs px-1 ${
-          selectedCategoryId === category.id ? "" : "text-gray-400"
-        }`}
-      >
+      <p className={`mt-2 text-center text-xs px-1 `}>
         {category.name.slice(0, 10)}
       </p>
     </div>

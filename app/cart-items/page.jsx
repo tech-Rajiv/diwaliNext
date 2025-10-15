@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CartLists from "../components/CartLists";
 import BackButton from "../components/uiByMe/BackButton";
@@ -9,20 +9,24 @@ import { useRouter } from "next/navigation";
 import { handleSaveOrder } from "./helper";
 import { toast } from "sonner";
 import OrderCreatedSuccessfully from "../components/uiByMe/OrderCreatedSuccessfully";
+import { CircleCheckBig } from "lucide-react";
 
 function page() {
   const { products, total_price, total_products_quantity } = useSelector(
     (state) => state.cartProducts
   );
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
   const handleSubmit = async () => {
+    setLoading(true);
+
     const saved = await handleSaveOrder({
       products,
       total_price,
       total_products_quantity,
     });
-
+    setLoading(false);
     if (saved.success) {
       dispatch(resetCart());
       toast.success("Order placed");
@@ -48,16 +52,31 @@ function page() {
         {products?.map((prod, index) => (
           <CartLists product={prod} key={index} />
         ))}
-        <div className="details flex  justify-between px-3 mt-4 border-t pt-4">
-          <div className="total flex gap-1">
-            <span>Total:</span>
-            <span className="font-semibold">
-              {total_price ? `${total_price} /-` : "No product"}
-            </span>
+        {!total_price && <p>no items </p>}
+        {total_price && (
+          <div className="details flex  justify-between px-3 mt-4 border-t pt-4">
+            <div className="total flex gap-1">
+              <span>Total quantity:</span>
+              <span className="font-semibold">{total_products_quantity}</span>
+            </div>
+            <div className="total flex gap-1">
+              <span>Total amount:</span>
+              <span className="font-semibold">{total_price}</span>
+            </div>
           </div>
-          <div className="save">
-            {total_price && <Button onClick={handleSubmit}>Purchase</Button>}
-          </div>
+        )}
+
+        <div className="save mt-5 flex justify-center sm:justify-end">
+          {total_price && (
+            <Button
+              disabled={loading}
+              onClick={handleSubmit}
+              className={"flex gap-2 items-center w-full"}
+            >
+              <CircleCheckBig />
+              {loading ? "Ordering..." : "Place order"}
+            </Button>
+          )}
         </div>
       </div>
     </div>

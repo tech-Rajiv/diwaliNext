@@ -30,13 +30,13 @@ export default function RootLayout({ children }) {
       >
         <ReduxProvider>
           <AuthIntializer>
-            <ProductsInitializer>
-              <Toaster position="top-center" />
-              <Header />
-              <div className="main min-h-screen  max-w-7xl mx-auto">
-                {children}
-              </div>
-            </ProductsInitializer>
+            {/* <ProductsInitializer> */}
+            <Toaster position="top-center" />
+            <Header />
+            <div className="main min-h-screen  max-w-7xl mx-auto">
+              {children}
+            </div>
+            {/* </ProductsInitializer> */}
           </AuthIntializer>
         </ReduxProvider>
         <Footer />

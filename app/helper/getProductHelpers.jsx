@@ -1,23 +1,47 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { getProductsFromBE } from "../store/slices/allProductSlice";
+import {
+  fetchProductsFailure,
+  fetchProductsStart,
+  fetchProductsSuccess,
+} from "../store/slices/storeSlice";
 
 function getProductHelpers() {
   const dispatch = useDispatch();
-  const fetchAllProducts = async () => {
+  const fetchAllProducts = async (shopId) => {
     try {
-      dispatch(getProductsFromBE({ loading: true }));
-      const res = await fetch(`/api/products`);
+      dispatch(fetchProductsStart());
+      const res = await fetch("/api/shop/get-products", {
+        method: "POST",
+        body: JSON.stringify({ shopId }),
+      });
       if (!res.ok) throw new Error(res.statusText);
+      console.log(res, "resss");
       const data = await res.json();
-      dispatch(getProductsFromBE({ products: data?.data }));
+      console.log("data: of allfetched produts", data?.data);
+      dispatch(fetchProductsSuccess(data?.data));
     } catch (error) {
-      dispatch(getProductsFromBE({ error: error.message }));
-    } finally {
-      dispatch(getProductsFromBE({ loading: false }));
+      dispatch(fetchProductsFailure(error.message));
     }
   };
-  const fetchAllCategories = async () => {
+  const fetchProductsByCategory = async (categoryId) => {
+    try {
+      dispatch(fetchProductsStart());
+      const res = await fetch("/api/shop/get-products-by-category", {
+        method: "POST",
+        body: JSON.stringify({ categoryId }),
+      });
+      if (!res.ok) throw new Error(res.statusText);
+      console.log(res, "resss");
+      const data = await res.json();
+      console.log("data: of allfetched produts", data?.data);
+      dispatch(fetchProductsSuccess(data?.data));
+    } catch (error) {
+      dispatch(fetchProductsFailure(error.message));
+    }
+  };
+  const fetchAllCategories = async (shopId) => {
     try {
       dispatch(getProductsFromBE({ loading: true }));
       const res = await fetch("/api/category/getcategories");
@@ -33,6 +57,7 @@ function getProductHelpers() {
 
   return {
     fetchAllProducts,
+    fetchProductsByCategory,
     fetchAllCategories,
   };
 }
