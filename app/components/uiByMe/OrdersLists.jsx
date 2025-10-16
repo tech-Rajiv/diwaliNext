@@ -1,42 +1,54 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import {
-  ItemActions,
-  ItemContent,
-  ItemDescription,
-  ItemFooter,
-  ItemHeader,
-  ItemMedia,
-  ItemTitle,
-} from "@/components/ui/item";
-import { Item } from "@radix-ui/react-select";
-import { ArrowUpRight, BadgeCheckIcon, ChevronRightIcon } from "lucide-react";
+import { ArrowDownToLine, ArrowUpRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
 
 function OrdersLists({ order }) {
   const router = useRouter();
-  console.log(order);
+
+  console.log(order, "orederrr");
   const handleRoutingToOrderDetails = () => {
-    router.push(`orders/${order?.id}`);
+    router.push(`/orders/${order?.id}`);
   };
+
   return (
-    <div className="outline flex sm:justify-between p-3 rounded-md">
-      <div className="info">
-        <p className="text-sm flex gap-2">
-          <span>id:</span> <span>{order?.id}</span>
-        </p>
-        <p className="">
-          <span>to:</span> <span>{order?.customer_name}</span>
+    <div className="border rounded-lg p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between shadow-sm hover:shadow-md transition-shadow bg-white">
+      {/* Order Info */}
+      <div className="space-y-1 text-sm">
+        <p className="font-medium">
+          <span className="text-gray-500">Order ID:</span> {order?.id}
         </p>
         <p>
-          <span>total amount:</span>{" "}
-          <span>{order?.total_amount ?? "10000"}</span>
+          <span className="text-gray-500">Customer:</span>{" "}
+          {order?.customer_name}
+        </p>
+        <p>
+          <span className="text-gray-500">Total:</span> ₹
+          {order?.total_amount ?? "10000"}
+        </p>
+        <p className="text-gray-500 text-xs">
+          {new Date(order?.created_at).toLocaleDateString()}
         </p>
       </div>
-      <div className="btn">
-        <Button onClick={handleRoutingToOrderDetails} variant={"outline"}>
-          view Details
-          <ArrowUpRight />
+
+      {/* Action Buttons */}
+      <div className="flex flex-col sm:flex-row gap-2 mt-3 sm:mt-0">
+        <Button
+          onClick={handleRoutingToOrderDetails}
+          variant="secondary"
+          className="flex items-center gap-1"
+        >
+          View Details <ArrowUpRight size={16} />
+        </Button>
+        <Button
+          onClick={() => console.log("Download order")}
+          variant="outline"
+          className="flex items-center gap-1"
+        >
+          Download Pdf
+          <ArrowDownToLine size={16} />
         </Button>
       </div>
     </div>
