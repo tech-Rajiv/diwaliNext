@@ -15,6 +15,9 @@ function InsightsOfShop({ data }) {
         <div className="memberInfo  ">
           <MemberInfo data={data} />
         </div>
+        <div className="pie mt-5">
+          <CustomPieChart data={data} />
+        </div>
         <div className="flex flex-col justify-center mt-5">
           <Image
             src="/bill.jpg"
@@ -29,9 +32,6 @@ function InsightsOfShop({ data }) {
             </a>
           </p>
         </div>
-        {/* <div className="pie mt-5">
-          <CustomPieChart data={data} />
-        </div> */}
       </div>
     </div>
   );
