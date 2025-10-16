@@ -16,6 +16,7 @@ import { toast } from "sonner";
 
 function AuthIntializer({ children }) {
   const dispatch = useDispatch();
+
   const userId = useSelector((state) => state?.auth?.id);
   const callAndSetUserIfFound = async () => {
     try {
@@ -63,9 +64,13 @@ function AuthIntializer({ children }) {
       dispatch(fetchProductsFailure("failed to add data"));
     }
   };
+  console.log("comp of authinitzler");
 
   useEffect(() => {
+    console.log("run in efect of get store detail");
     if (userId) {
+      console.log("shopd etails actual run");
+
       getStoreDetails(userId);
     }
   }, [userId]);
