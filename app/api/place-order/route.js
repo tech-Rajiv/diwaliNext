@@ -27,6 +27,8 @@ export async function POST(request) {
       p_by_admin: userId,
       p_customer_name: "rajiv",
       p_items: products,
+      p_total_amount: total_price,
+      p_total_quantity: total_products_quantity,
     });
     if (error) {
       console.error("Supabase RPC error:", error);
