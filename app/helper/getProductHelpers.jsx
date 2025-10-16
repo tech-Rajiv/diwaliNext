@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { getProductsFromBE } from "../store/slices/allProductSlice";
+
 import {
   fetchProductsFailure,
   fetchProductsStart,
@@ -41,24 +41,10 @@ function getProductHelpers() {
       dispatch(fetchProductsFailure(error.message));
     }
   };
-  const fetchAllCategories = async () => {
-    try {
-      dispatch(getProductsFromBE({ loading: true }));
-      const res = await fetch("/api/category/getcategories");
-      if (!res.ok) throw new Error(res.statusText);
-      const data = await res.json();
-      dispatch(getProductsFromBE({ allCategories: data?.data }));
-    } catch (error) {
-      dispatch(getProductsFromBE({ error: error.message }));
-    } finally {
-      dispatch(getProductsFromBE({ loading: false }));
-    }
-  };
 
   return {
     fetchAllProducts,
     fetchProductsByCategory,
-    fetchAllCategories,
   };
 }
 

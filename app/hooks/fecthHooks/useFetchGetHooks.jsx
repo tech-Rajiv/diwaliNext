@@ -8,12 +8,10 @@ function useFetchGetHooks(url) {
     setLoading(true);
     try {
       const res = await fetch(url);
-      console.log(res, "fetched res");
       if (!res.ok) {
         throw new Error();
       }
       const data = await res.json();
-      console.log(data);
       setData(data?.data);
     } catch (error) {
       setError(error?.message ?? "something went wrong");

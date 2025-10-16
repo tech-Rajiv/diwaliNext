@@ -17,10 +17,12 @@ function page() {
     submitLoading: false,
     deleteLoading: false,
   });
-  const { fetchAllProducts, fetchAllCategories } = getProductHelpers();
+  const { fetchAllProducts } = getProductHelpers();
   const { validaitonOfAllFieldsAreValid, compressedAndCloudinaryUrl } =
     addProductHelpers();
-  const allProducts = useSelector((state) => state.allProducts.products);
+  const allProducts = useSelector(
+    (state) => state.store?.allProducts?.products
+  );
   const router = useRouter();
 
   useEffect(() => {
@@ -71,7 +73,6 @@ function page() {
       }
       const data = await res.json();
       fetchAllProducts();
-      fetchAllCategories();
       toast.success("Updated product successfully");
       router.push("/");
     } catch (error) {

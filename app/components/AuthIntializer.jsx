@@ -70,7 +70,6 @@ function AuthIntializer({ children }) {
     console.log("run in efect of get store detail");
     if (userId) {
       console.log("shopd etails actual run");
-
       getStoreDetails(userId);
     }
   }, [userId]);
