@@ -21,11 +21,11 @@ function CustomPieChart({ data }) {
   const total_investment = data?.shopDetails?.total_investment || 110000;
 
   const categoryData = [
-    { name: "Bombs", invested_amount: 50300 },
-    { name: "Sparkels", invested_amount: 9900 },
-    { name: "Sky shots", invested_amount: 23000 },
-    { name: "Kids", invested_amount: 8700 },
-    { name: "Others", invested_amount: 18100 },
+    { name: "Bombs", invested_amount: 50300, pcs: 502 },
+    { name: "Sparkels", invested_amount: 9900, pcs: 490 },
+    { name: "Sky shots", invested_amount: 23000, pcs: 118 },
+    { name: "Kids", invested_amount: 8700, pcs: "can't say" },
+    { name: "Others", invested_amount: 18100, pcs: "can't say" },
   ];
 
   // State for dynamic radius (mobile vs desktop)
@@ -106,8 +106,16 @@ function CustomPieChart({ data }) {
               ))}
             </Pie>
             <Tooltip
-              formatter={(value) => `₹${value.toLocaleString()}`}
-              contentStyle={{ borderRadius: "10px" }}
+              formatter={(value, name, props) => [
+                `${name} ₹${value.toLocaleString()} (${
+                  props.payload.pcs || 0
+                } single boxs)`,
+              ]}
+              contentStyle={{
+                borderRadius: "10px",
+                backgroundColor: "white",
+                border: "1px solid #ddd",
+              }}
             />
             <Legend
               layout="horizontal"
