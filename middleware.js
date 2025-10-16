@@ -8,7 +8,6 @@ const secret = new TextEncoder().encode(process.env.SUPABASE_JWT_SECRET);
 
 export async function middleware(request) {
   const token = request.cookies.get("token")?.value;
-  console.log("middlleware run");
 
   const pathname = request.nextUrl.pathname;
 
@@ -17,8 +16,11 @@ export async function middleware(request) {
   );
 
   if (isProtected) {
+    if (!token) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
     try {
-      const { payload } = await jwtVerify(token, secret);
+      await jwtVerify(token, secret);
       return NextResponse.next();
     } catch (err) {
       return NextResponse.redirect(new URL("/login", request.url));
@@ -33,4 +35,8 @@ export async function middleware(request) {
       return NextResponse.redirect(new URL("/", request.url));
     }
   }
+  return NextResponse.next();
 }
+export const config = {
+  matcher: ["/admin/:path*", "/orders/:path*", "/login"],
+};

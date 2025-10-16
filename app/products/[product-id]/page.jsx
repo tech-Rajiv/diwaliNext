@@ -1,38 +1,24 @@
 "use client";
 import BackButton from "@/app/components/uiByMe/BackButton";
+import SomethingWentWrong from "@/app/components/uiByMe/error/SomethingWentWrong";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Info } from "lucide-react";
 import Image from "next/image";
-import { useParams, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function page() {
-  const [loading, setLoading] = useState(true);
   const [codeLoading, setCodeLoading] = useState(false);
   const [codeError, setCodeError] = useState(false);
-  const [prod, setProd] = useState();
-  const params = useParams();
   const [code, setCode] = useState("");
 
-  const [buyPrice, setBuyPrice] = useState();
+  const params = useParams();
   const id = params["product-id"];
-
-  const allProducts = useSelector((state) => state.allProducts?.products);
-
-  useEffect(() => {
-    const product = allProducts.find((x) => x?.id == id);
-    if (product) {
-      setLoading(false);
-      setProd(product);
-    }
-  }, [id, allProducts]);
-
-  if (loading) {
-    return "Loading...";
-  }
+  const prod = useSelector((state) => state.store?.allProducts?.products).find(
+    (x) => x.id == id
+  );
+  const [buyPrice, setBuyPrice] = useState();
 
   const handleCodeChange = (e) => {
     setCode(e.target.value);
@@ -62,6 +48,11 @@ export default function page() {
       setCodeLoading(false);
     }
   };
+
+  if (!prod) {
+    return <SomethingWentWrong />;
+  }
+
   return (
     <div className="mt-5">
       <BackButton />
@@ -100,22 +91,9 @@ export default function page() {
                 <span className="font-medium"> Products Id :</span>
                 <span>{prod?.id} </span>
               </div>
-              <div className=" flex  gap-2">
-                <span className="font-medium">
-                  {" "}
-                  Purchased boxes (kitna bandha) :
-                </span>
-                <span>{prod?.purchased_box} </span>
-              </div>
-              <div className=" flex  gap-2">
-                <span className="font-medium">
-                  {" "}
-                  Packets per boxes (ek bandha m kitne packets) :
-                </span>
-                <span>{prod?.packet_per_box} </span>
-              </div>
+
               <div className="gap-2 flex">
-                <span className="font-medium"> Total packets :</span>
+                <span className="font-medium"> Total single packets :</span>
                 <span>{prod?.purchased_single_packets} </span>
               </div>
               <div className=" flex  gap-2">
