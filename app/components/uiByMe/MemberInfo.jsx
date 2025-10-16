@@ -21,8 +21,10 @@ function MemberInfo({ data }) {
         <div className="row gap-2">
           <div>Members:</div>
           <div className="mem flex gap-3">
-            {data?.shopDetails?.shop_members?.members?.map((x) => (
-              <p className="flex-nowrap">{x.name},</p>
+            {data?.shopDetails?.shop_members?.members?.map((x, i) => (
+              <p key={i} className="flex-nowrap">
+                {x.name},
+              </p>
             ))}
           </div>
         </div>

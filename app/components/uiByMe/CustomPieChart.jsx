@@ -40,11 +40,11 @@ function CustomPieChart() {
   return (
     <div>
       {" "}
-      <Card className="w-full max-w-md mx-auto">
+      <Card className="w-full">
         <CardHeader>
           <CardTitle>Investment Distribution</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className={"px-2"}>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
@@ -53,8 +53,8 @@ function CustomPieChart() {
                 nameKey="name"
                 cx="50%"
                 cy="50%"
-                outerRadius={60}
-                label
+                outerRadius={100}
+                label={({ percent }) => `${(percent * 100).toFixed(0)}%`}
               >
                 {custom.map((entry, index) => (
                   <Cell

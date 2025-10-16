@@ -41,7 +41,7 @@ function getProductHelpers() {
       dispatch(fetchProductsFailure(error.message));
     }
   };
-  const fetchAllCategories = async (shopId) => {
+  const fetchAllCategories = async () => {
     try {
       dispatch(getProductsFromBE({ loading: true }));
       const res = await fetch("/api/category/getcategories");

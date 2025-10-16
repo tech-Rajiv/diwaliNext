@@ -7,7 +7,7 @@ import SingleEditProductBox from "./uiByMe/SingleEditProductBox";
 
 function EditAllProductsComponents() {
   const { loading, error, products } = useSelector(
-    (state) => state.allProducts
+    (state) => state.store?.allProducts
   );
   const { fetchAllProducts } = getProductHelpers();
   const [deleting, setDeleting] = useState(false);
