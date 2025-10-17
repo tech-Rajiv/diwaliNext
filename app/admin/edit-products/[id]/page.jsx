@@ -26,7 +26,7 @@ function page() {
   const router = useRouter();
 
   useEffect(() => {
-    const prod = allProducts.find((x) => x.id == id);
+    const prod = allProducts?.find((x) => x.id == id);
     setFormData(prod);
   }, [allProducts]);
 
@@ -49,6 +49,7 @@ function page() {
 
   const submitTheForm = async () => {
     const hasError = validaitonOfAllFieldsAreValid(formData);
+    console.log("formData: ", formData);
     if (hasError) {
       toast.error("all fields are required");
       // setError("all fields are required");

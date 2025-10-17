@@ -56,7 +56,7 @@ function AuthIntializer({ children }) {
       const data = await res.json();
 
       dispatch(setStoreName(data?.shopDetails?.working_shop_name));
-      dispatch(setStoreId(data?.shopDetails?.working_shop_name));
+      dispatch(setStoreId(data?.shopDetails?.working_shop_id));
       dispatch(fetchProductsSuccess(data?.productData));
       dispatch(fetchCategoriesSuccess(data?.categoryData));
     } catch (error) {

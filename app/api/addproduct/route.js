@@ -12,11 +12,10 @@ export async function POST(request) {
       purchased_year,
       purchased_single_packets,
       purchased_from,
-      purchased_box,
-      packet_per_box,
       available_stock,
       category_id,
       image_url,
+      shop_id,
     } = formData;
     const { data, error } = await supabase.from("products").insert([
       {
@@ -27,11 +26,10 @@ export async function POST(request) {
         purchased_year,
         purchased_single_packets,
         purchased_from,
-        purchased_box,
-        packet_per_box,
         available_stock,
         category_id,
         image_url,
+        shop_id,
       },
     ]);
     if (error) {

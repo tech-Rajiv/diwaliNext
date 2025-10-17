@@ -9,13 +9,10 @@ import {
 
 function getProductHelpers() {
   const dispatch = useDispatch();
-  const fetchAllProducts = async (shopId) => {
+  const fetchAllProducts = async () => {
     try {
       dispatch(fetchProductsStart());
-      const res = await fetch("/api/shop/get-products", {
-        method: "POST",
-        body: JSON.stringify({ shopId }),
-      });
+      const res = await fetch("/api/shop/get-all-products");
       if (!res.ok) throw new Error(res.statusText);
 
       const data = await res.json();

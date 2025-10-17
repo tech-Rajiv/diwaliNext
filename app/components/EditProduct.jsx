@@ -94,30 +94,6 @@ function EditProduct({
       </div>
 
       <div className="wrap flex flex-col gap-2">
-        <Label htmlFor="purchased_box">Purchased box :</Label>
-
-        <Input
-          type="number"
-          id="purchased_box"
-          placeholder="how much bandha"
-          value={formData?.purchased_box}
-          onChange={handleOnChangeOfInputs}
-          name="purchased_box"
-        />
-      </div>
-      <div className="wrap flex flex-col gap-2">
-        <Label htmlFor="purchased_box">packet per box :</Label>
-
-        <Input
-          type="number"
-          id="packet_per_box"
-          placeholder="how much packets in one bandha"
-          value={formData?.packet_per_box}
-          onChange={handleOnChangeOfInputs}
-          name="packet_per_box"
-        />
-      </div>
-      <div className="wrap flex flex-col gap-2">
         <Label htmlFor="purchased_single_packets">Total single packets :</Label>
 
         <Input

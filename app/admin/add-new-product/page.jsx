@@ -6,8 +6,12 @@ import { useRouter } from "next/navigation";
 import BackButton from "../../components/uiByMe/BackButton";
 import getProductHelpers from "@/app/helper/getProductHelpers";
 import addProductHelpers from "@/app/helper/addProductHelpers";
+import { useSelector } from "react-redux";
 
 function page() {
+  const shopId = useSelector((state) => state.store?.storeId);
+  console.log("shopId : ", shopId);
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -15,11 +19,10 @@ function page() {
     buy_price: "",
     available_stock: "",
     category_id: "",
-    purchased_box: "",
     purchased_from: "",
     purchased_single_packets: "",
-    packet_per_box: "",
     purchased_year: "",
+    shop_id: shopId,
   });
   const [hasImage, setHasImage] = useState();
   const [error, setError] = useState(false);
@@ -29,12 +32,15 @@ function page() {
   const { validaitonOfAllFieldsAreValid, compressedAndCloudinaryUrl } =
     addProductHelpers();
   //this is used to fecth new product if successfully added to products table bcz right now it is cached so i want to manually call this
-  const { fetchAllProducts, fetchAllCategories } = getProductHelpers();
+  const { fetchAllProducts } = getProductHelpers();
 
   const handleOnChangeOfInputs = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     setError();
+    if (!formData?.shop_id) {
+      setFormData((prev) => ({ ...prev, shop_id: shopId }));
+    }
   };
   const handleImageSelect = (e) => {
     const file = e.target.files[0];
@@ -43,6 +49,8 @@ function page() {
 
   const submitTheForm = async () => {
     const hasError = validaitonOfAllFieldsAreValid(formData);
+    console.log("formData: ", formData);
+    console.log("here before toast");
     if (hasError) {
       toast.error("all fields are required");
       setError("all fields are required");
@@ -61,7 +69,7 @@ function page() {
         throw new Error();
       }
       fetchAllProducts();
-      fetchAllCategories();
+
       toast.success("added new product successfully");
       router.push("/");
     } catch (error) {

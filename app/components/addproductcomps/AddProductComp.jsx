@@ -23,7 +23,7 @@ function AddProductComp() {
   const { validaitonOfAllFieldsAreValid, compressedAndCloudinaryUrl } =
     addProductHelpers();
   //this is used to fecth new product if successfully added to products table bcz right now it is cached so i want to manually call this
-  const { fetchAllProducts, fetchAllCategories } = getProductHelpers();
+  const { fetchAllProducts } = getProductHelpers();
   const handleOnChangeOfInputs = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -56,7 +56,7 @@ function AddProductComp() {
       const data = await res.json();
 
       fetchAllProducts();
-      fetchAllCategories();
+
       toast.success("added new product successfully");
       router.push("/");
     } catch (error) {
