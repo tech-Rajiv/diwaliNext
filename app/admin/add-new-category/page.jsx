@@ -33,7 +33,7 @@ function page() {
 
   const createNewCategory = async (newCategory) => {
     try {
-      const res = await fetch("/api/category/new-category", {
+      const res = await fetch("/api/add-category", {
         method: "POST",
         body: JSON.stringify(newCategory),
       });
