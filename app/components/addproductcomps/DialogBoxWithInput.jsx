@@ -15,12 +15,12 @@ import React, { useState } from "react";
 import { CircleCheckBig, UserPen } from "lucide-react";
 
 function DialogBoxWithInput({ name, onClickYesFn, loading, heading, content }) {
-  const [cName, setCName] = useState("Guest");
-  const [cPhone, setCPhone] = useState(999999999);
+  const [cName, setCName] = useState("");
+  const [cPhone, setCPhone] = useState();
   const [open, setOpen] = useState(false);
 
   const handleSubmit = () => {
-    onClickYesFn(cName, cPhone);
+    onClickYesFn(cName || "Guest", cPhone);
   };
   return (
     <div>
@@ -34,8 +34,8 @@ function DialogBoxWithInput({ name, onClickYesFn, loading, heading, content }) {
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>{heading}</DialogTitle>
-            <DialogDescription>{content}</DialogDescription>
+            {/* <DialogTitle>{heading}</DialogTitle> */}
+            {/* <DialogDescription>{content}</DialogDescription> */}
             <div className="wrapper flex flex-col sm:flex-row gap-2">
               <div className="imgDiv bg-gray-200 flex justify-center rounded-xl">
                 <img src={"/qrr.jpg"} alt="" className="w-full sm:w-60" />

@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import BackButton from "../components/uiByMe/BackButton";
 import OrdersLists from "../components/uiByMe/OrdersLists";
 import { ScrollText } from "lucide-react";
+import SomethingWentWrong from "../components/uiByMe/error/SomethingWentWrong";
 
 function page() {
   const [allOrders, setAllOrders] = useState();
@@ -27,6 +28,7 @@ function page() {
       setAllOrders(data?.data);
     } catch (error) {
       console.log("hadd errror while getting orders");
+      setError(true);
     } finally {
       setLoading(false);
     }
@@ -37,6 +39,9 @@ function page() {
     }
   }, [userId]);
 
+  if (error) {
+    return <SomethingWentWrong />;
+  }
   return (
     <div>
       <BackButton />

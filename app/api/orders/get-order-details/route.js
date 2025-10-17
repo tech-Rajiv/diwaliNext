@@ -1,21 +1,32 @@
+import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabaseClient";
 
-const { NextResponse } = require("next/server");
-
 export const POST = async (request) => {
-  const body = await request.json();
+  try {
+    const body = await request.json();
+    const { id } = body;
 
-  const { id } = body;
-  console.log("id: ", id);
+    const [metaDetails, productsDetails] = await Promise.all([
+      supabase.from("orders").select("*").eq("id", id).single(),
+      supabase.from("orders_lists").select("*").eq("order_id", id),
+    ]);
 
-  const { data, error } = await supabase
-    .from("orders_lists")
-    .select("*")
-    .eq("order_id", id);
-  console.log("data: of order details", data);
+    const { data: meta, error: errorMeta } = metaDetails;
+    const { data: products, error: errorProducts } = productsDetails;
 
-  if (error) {
-    return NextResponse.json({ msg: "error" }, { status: 402 });
+    if (errorMeta || errorProducts) {
+      console.error("Error fetching order details:");
+      return NextResponse.json(
+        { message: "Failed to fetch order details" },
+        { status: 500 }
+      );
+    }
+    return NextResponse.json({ meta, products });
+  } catch (err) {
+    console.error("Unexpected error:", err);
+    return NextResponse.json(
+      { message: "Internal server error" },
+      { status: 500 }
+    );
   }
-  return NextResponse.json({ data });
 };

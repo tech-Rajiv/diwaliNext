@@ -20,12 +20,17 @@ function page() {
   const dispatch = useDispatch();
   const router = useRouter();
   const handleSubmit = async (cname, cphone) => {
-    setLoading(true);
+    const updatedProducts = products.map((x) => ({
+      ...x,
+      line_total: x.quantity * x.sell_price,
+    }));
+    console.log(updatedProducts, total_price, total_products_quantity);
 
+    setLoading(true);
     const saved = await handleSaveOrder({
       customer_name: cname,
       customer_phone: cphone,
-      products,
+      products: updatedProducts,
       total_price,
       total_products_quantity,
     });
