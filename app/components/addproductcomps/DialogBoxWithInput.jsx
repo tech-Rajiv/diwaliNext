@@ -38,13 +38,14 @@ function DialogBoxWithInput({ name, onClickYesFn, loading, heading, content }) {
             <DialogDescription>{content}</DialogDescription>
             <div className="wrapper flex flex-col sm:flex-row gap-2">
               <div className="imgDiv bg-gray-200 flex justify-center rounded-xl">
-                <Image
-                  src={"/qr.png"}
+                <img src={"/qrr.jpg"} alt="" className="w-full sm:w-60" />
+                {/* <Image
+                  src={"/qrr.jpg"}
                   width={100}
                   height={100}
                   alt="qr"
                   className="w-full sm:w-60"
-                />
+                /> */}
               </div>
               <div className="infos">
                 <h2 className="font-medium gap-2 hidden sm:flex mb-5">
