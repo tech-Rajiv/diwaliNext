@@ -20,6 +20,10 @@ function OrdersLists({ order }) {
         <p className="font-medium">
           <span className="text-gray-500">Order ID:</span> {order?.id}
         </p>
+        <p className="text-gray-500 text-xs flex gap-2">
+          <span>{new Date(order?.created_at).toDateString()}</span>|
+          <span>{new Date(order?.created_at).toLocaleTimeString()}</span>
+        </p>
         <p>
           <span className="text-gray-500">Customer:</span>{" "}
           {order?.customer_name}
@@ -27,9 +31,6 @@ function OrdersLists({ order }) {
         <p>
           <span className="text-gray-500">Total:</span> ₹
           {order?.total_amount ?? "10000"}
-        </p>
-        <p className="text-gray-500 text-xs">
-          {new Date(order?.created_at).toLocaleDateString()}
         </p>
       </div>
 

@@ -39,7 +39,7 @@ function DialogBoxWithInput({ name, onClickYesFn, loading, heading, content }) {
             <div className="wrapper flex flex-col sm:flex-row gap-2">
               <div className="imgDiv bg-gray-200 flex justify-center rounded-xl">
                 <Image
-                  src={"/qrr.jpg"}
+                  src={"/qr.png"}
                   width={100}
                   height={100}
                   alt="qr"

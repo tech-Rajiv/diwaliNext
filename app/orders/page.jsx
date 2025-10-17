@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import BackButton from "../components/uiByMe/BackButton";
 import OrdersLists from "../components/uiByMe/OrdersLists";
+import { ScrollText } from "lucide-react";
 
 function page() {
   const [allOrders, setAllOrders] = useState();
@@ -39,7 +40,12 @@ function page() {
   return (
     <div>
       <BackButton />
-      <div className="wrpper max-w-xl mx-auto">
+      <div className="wrpper max-w-xl mx-auto mb-5">
+        <div className="head flex gap-1 justify-center mb-5 px-5">
+          <ScrollText />
+          <h2>Previous orders:</h2>
+        </div>
+
         {loading ? (
           "loading"
         ) : (
