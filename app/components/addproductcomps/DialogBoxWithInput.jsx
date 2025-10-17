@@ -1,4 +1,4 @@
-import { getUrlFromCloudinary } from "@/app/helper/addProductHelpers";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -12,73 +12,85 @@ import {
 import { Input } from "@/components/ui/input";
 import { DialogClose } from "@radix-ui/react-dialog";
 import React, { useState } from "react";
+import { CircleCheckBig, UserPen } from "lucide-react";
 
-function DialogBoxWithInput({ name, onClickYesFn, heading, content }) {
-  const [input, setInput] = useState();
-  const [imageFile, setImageFile] = useState();
-  const [loading, setLoading] = useState();
-  const [error, setError] = useState("");
+function DialogBoxWithInput({ name, onClickYesFn, loading, heading, content }) {
+  const [cName, setCName] = useState("Guest");
+  const [cPhone, setCPhone] = useState(999999999);
   const [open, setOpen] = useState(false);
 
-  const onYesHandle = async () => {
-    if (!input || !imageFile) {
-      setError("All fields are required");
-      return;
-    }
-    setLoading(true);
-    // const urlfromCloudinary = await getUrlFromCloudinary(imageFile);
-    const newCategory = {
-      name: input,
-      image_url:
-        "https://res.cloudinary.com/db3uycxd3/image/upload/v1759492514/mif8idxcz59kkq9xe4ni.jpg",
-    };
-
-    await onClickYesFn(newCategory, setLoading);
-    setOpen(false);
+  const handleSubmit = () => {
+    onClickYesFn(cName, cPhone);
   };
-  const handleImageSelect = (e) => {
-    const file = e.target.files[0];
-    setImageFile(file);
-  };
-
   return (
     <div>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger>{name}</DialogTrigger>
+        <DialogTrigger>
+          <Button className={"flex gap-2 items-center w-full"}>
+            {" "}
+            <CircleCheckBig />
+            {name}
+          </Button>
+        </DialogTrigger>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>{heading}</DialogTitle>
             <DialogDescription>{content}</DialogDescription>
-            <Input
-              type="text"
-              placeholder="new category"
-              onChange={(e) => setInput(e.target.value)}
-              name="available_stock"
-            />
-
-            <Input
-              id="picture"
-              name="image"
-              type="file"
-              onChange={handleImageSelect}
-            />
+            <div className="wrapper flex flex-col sm:flex-row gap-2">
+              <div className="imgDiv bg-gray-200 flex justify-center rounded-xl">
+                <Image
+                  src={"/qrr.jpg"}
+                  width={100}
+                  height={100}
+                  alt="qr"
+                  className="w-full sm:w-60"
+                />
+              </div>
+              <div className="infos">
+                <h2 className="font-medium gap-2 hidden sm:flex mb-5">
+                  <UserPen />
+                  Details
+                </h2>
+                <label htmlFor="cname" className="mt-5 hidden sm:flex">
+                  Customer name:
+                </label>
+                <Input
+                  id={"cname"}
+                  className={"mt-2 sm:mb-5"}
+                  type="text"
+                  value={cName}
+                  placeholder="customer name"
+                  onChange={(e) => setCName(e.target.value)}
+                  name="available_stock"
+                />
+                <label htmlFor="cphone" className="mt-5 hidden sm:flex">
+                  Phone no:
+                </label>
+                <Input
+                  id={"cphone"}
+                  className={"mt-2"}
+                  type="number"
+                  value={cPhone}
+                  placeholder="phone no"
+                  onChange={(e) => setCPhone(e.target.value)}
+                  name="available_stock"
+                />
+              </div>
+            </div>
           </DialogHeader>
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline">Back</Button>
+              <Button variant="outline">Cancel</Button>
             </DialogClose>
             <Button
               className={"cursor-pointer"}
               type="submit"
               disabled={loading}
-              onClick={onYesHandle}
+              onClick={handleSubmit}
             >
-              {loading ? "wait..." : "Create"}
+              {loading ? "wait..." : "Place order"}
             </Button>
           </DialogFooter>
-          {error && (
-            <div className="err text-center text-red-400 text-sm">{error}</div>
-          )}
         </DialogContent>
       </Dialog>
     </div>

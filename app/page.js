@@ -5,10 +5,15 @@ import BannerToShowPrice from "./components/BannerToShowPrice";
 import Category from "./components/Category";
 import ProductsShowComp from "./components/ProductsShowComp";
 import ShowCartWrapper from "./components/ShowCartWrapper";
+import { useRouter } from "next/navigation";
 
 function page() {
   const cartItems = useSelector((state) => state.cartProducts.products);
-
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const router = useRouter();
+  // if (!isLoggedIn) {
+  //   router.replace("/login");
+  // }
   return (
     <div className="flex flex-col gap-5 relative">
       <BannerToShowPrice />

@@ -5,7 +5,13 @@ const { NextResponse } = require("next/server");
 
 export async function POST(request) {
   const body = await request.json();
-  const { products, total_price, total_products_quantity } = body;
+  const {
+    products,
+    customer_name,
+    customer_phone,
+    total_price,
+    total_products_quantity,
+  } = body;
   console.log(products, "products");
   const token = request.cookies.get("token")?.value;
   if (!token) {
@@ -25,8 +31,9 @@ export async function POST(request) {
     // Call your RPC
     const { error } = await supabase.rpc("create_order_with_items", {
       p_by_admin: userId,
-      p_customer_name: "rajiv",
+      p_customer_name: customer_name,
       p_items: products,
+      p_customer_phone: customer_phone,
       p_total_amount: total_price,
       p_total_quantity: total_products_quantity,
     });

@@ -10,6 +10,7 @@ import { handleSaveOrder } from "./helper";
 import { toast } from "sonner";
 import OrderCreatedSuccessfully from "../components/uiByMe/OrderCreatedSuccessfully";
 import { CircleCheckBig } from "lucide-react";
+import DialogBoxWithInput from "../components/addproductcomps/DialogBoxWithInput";
 
 function page() {
   const { products, total_price, total_products_quantity } = useSelector(
@@ -18,10 +19,12 @@ function page() {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
-  const handleSubmit = async () => {
+  const handleSubmit = async (cname, cphone) => {
     setLoading(true);
 
     const saved = await handleSaveOrder({
+      customer_name: cname,
+      customer_phone: cphone,
       products,
       total_price,
       total_products_quantity,
@@ -67,14 +70,13 @@ function page() {
 
         <div className="save mt-5 flex justify-center sm:justify-end">
           {total_price && (
-            <Button
-              disabled={loading}
-              onClick={handleSubmit}
-              className={"flex gap-2 items-center w-full"}
-            >
-              <CircleCheckBig />
-              {loading ? "Ordering..." : "Place order"}
-            </Button>
+            <DialogBoxWithInput
+              name={"proceed to pay"}
+              onClickYesFn={handleSubmit}
+              loading={loading}
+              content={"pay on the Qr below"}
+              heading={"Order details"}
+            />
           )}
         </div>
       </div>
