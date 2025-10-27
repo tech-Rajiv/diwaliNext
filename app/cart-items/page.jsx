@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { handleSaveOrder } from "./helper";
 import { toast } from "sonner";
 import OrderCreatedSuccessfully from "../components/uiByMe/OrderCreatedSuccessfully";
-import { CircleCheckBig } from "lucide-react";
+import { BadgeDollarSignIcon, CircleCheckBig, DollarSign } from "lucide-react";
 import DialogBoxWithInput from "../components/addproductcomps/DialogBoxWithInput";
 import Script from "next/script";
 
@@ -98,17 +98,15 @@ function page() {
           </div>
         )}
 
-        <div className="save mt-5 flex justify-center sm:justify-end">
+        <div className="save mt-5 flex justify-between ">
           {total_price && (
-            <Button onClick={handlePayment}>
-              Test-Pay {total_price} <CircleCheckBig />
+            <Button variant={"outline"} onClick={handlePayment}>
+              Test-Pay {total_price} <BadgeDollarSignIcon />
             </Button>
           )}
-        </div>
-        <div className="save mt-5 flex justify-center sm:justify-end">
           {total_price && (
             <DialogBoxWithInput
-              name={"Proceed to create order"}
+              name={"Create order"}
               onClickYesFn={handleSubmit}
               loading={loading}
               content={"pay on the Qr below"}
