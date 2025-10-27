@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import OrderCreatedSuccessfully from "../components/uiByMe/OrderCreatedSuccessfully";
 import { CircleCheckBig } from "lucide-react";
 import DialogBoxWithInput from "../components/addproductcomps/DialogBoxWithInput";
+import Script from "next/script";
 
 function page() {
   const { products, total_price, total_products_quantity } = useSelector(
@@ -19,6 +20,29 @@ function page() {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
+
+  const handlePayment = () => {
+    const options = {
+      key: "rzp_test_1DP5mmOlF5G5ag",
+      amount: Math.floor(total_price * 100),
+      currency: "INR",
+      name: "Test Store",
+      description: "Testing Razorpay Checkout",
+      handler: (response) => {
+        router.push("/orders/order-successfull");
+
+        // alert(`Payment successful: ${response.razorpay_payment_id}`);
+      },
+      prefill: {
+        name: "John Doe",
+        email: "john@example.com",
+        contact: "9999999999",
+      },
+      theme: { color: "#3399cc" },
+    };
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  };
   const handleSubmit = async (cname, cphone) => {
     const updatedProducts = products.map((x) => ({
       ...x,
@@ -52,6 +76,7 @@ function page() {
   };
   return (
     <div className="">
+      <Script src="https://checkout.razorpay.com/v1/checkout.js" />
       <BackButton />
 
       <div className="wrapper px-2 max-w-xl mx-auto">
@@ -75,8 +100,15 @@ function page() {
 
         <div className="save mt-5 flex justify-center sm:justify-end">
           {total_price && (
+            <Button onClick={handlePayment}>
+              Test-Pay {total_price} <CircleCheckBig />
+            </Button>
+          )}
+        </div>
+        <div className="save mt-5 flex justify-center sm:justify-end">
+          {total_price && (
             <DialogBoxWithInput
-              name={"proceed to pay"}
+              name={"Proceed to create order"}
               onClickYesFn={handleSubmit}
               loading={loading}
               content={"pay on the Qr below"}
