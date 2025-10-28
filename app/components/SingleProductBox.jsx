@@ -80,7 +80,7 @@ function SingleProductBox({ prod }) {
             alt={prod?.title}
           />
         )}
-        <div className="btn absolute z-5 bottom-1 right-1 overflow-hidden">
+        <div className="btn absolute  bottom-1 right-1 overflow-hidden">
           {productAlreadyInCart ? (
             <div className="mt-3 flex items-center justify-between text-[20px]">
               <div className="flex items-center gap-1 bg-white rounded-full p-1">

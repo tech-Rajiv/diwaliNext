@@ -12,6 +12,11 @@ import OrderCreatedSuccessfully from "../components/uiByMe/OrderCreatedSuccessfu
 import { BadgeDollarSignIcon, CircleCheckBig, DollarSign } from "lucide-react";
 import DialogBoxWithInput from "../components/addproductcomps/DialogBoxWithInput";
 import Script from "next/script";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+);
 
 function page() {
   const { products, total_price, total_products_quantity } = useSelector(
@@ -74,6 +79,17 @@ function page() {
 
     toast.error(saved?.message ?? "something went wrong");
   };
+  const handleStripePayment = async () => {
+    const res = await fetch("/api/create-checkout-session", { method: "POST" });
+    const data = await res.json();
+    console.log(res, "res");
+    console.log(data, "data");
+    if (data.url) {
+      window.location.href = data.url; // ✅ direct redirect
+    } else {
+      alert("Failed to create checkout session");
+    }
+  };
   return (
     <div className="">
       <Script src="https://checkout.razorpay.com/v1/checkout.js" />
@@ -101,9 +117,14 @@ function page() {
         <div className="save mt-5 flex justify-between ">
           {total_price && (
             <Button variant={"outline"} onClick={handlePayment}>
-              Test-Pay {total_price} <BadgeDollarSignIcon />
+              Test-RazorPay {total_price} <BadgeDollarSignIcon />
             </Button>
           )}
+          {/* {total_price && (
+            <Button variant={"outline"} onClick={handleStripePayment}>
+              Test-StripePay {total_price} <BadgeDollarSignIcon />
+            </Button>
+          )} */}
           {total_price && (
             <DialogBoxWithInput
               name={"Create order"}

@@ -20,6 +20,7 @@ function page() {
       <div className="conatiner px-5 mt-5">
         <Category />
       </div>
+      <hr />
       <ProductsShowComp />
       {cartItems.length ? (
         <div className="w-full flex justify-center mx-auto bg-gray-200">

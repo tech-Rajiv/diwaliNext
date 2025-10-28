@@ -14,7 +14,7 @@ function Category() {
 
   return (
     <div>
-      <h2 className="font-medium">Products</h2>
+      <h2 className="font-medium">Categories</h2>
       <div className="all flex gap-5 mt-5 overflow-auto py-2  hide-scrollbar">
         {loading && <SkeletonForCategories />}
         {categories?.map((category, index) => (

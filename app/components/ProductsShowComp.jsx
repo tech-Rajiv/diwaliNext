@@ -17,7 +17,13 @@ function ProductsShowComp() {
   }
   return (
     <div className="wrapper mt-2">
-      <div className="flex gap-5 overflow-auto px-5 py-2  hide-scrollbar">
+      <h2 className="mb-3 font-medium px-5 ">Products</h2>
+      <div
+        className="
+      flex gap-y-10 gap-8 overflow-x-auto px-5 py-2 hide-scrollbar
+      sm:grid sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5
+    "
+      >
         {products?.map((prod, index) => (
           <SingleProductBox key={index} prod={prod} />
         ))}

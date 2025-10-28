@@ -12,9 +12,9 @@ function ShowCartWrapper() {
     (state) => state.cartProducts.products
   ).length;
   return (
-    <div className="px-5 py-3 flex justify-center items-center rounded-full bg-black/80 text-white ">
+    <div className="px-5 py-3 z-100 flex justify-center items-center rounded-full bg-black/80 text-white ">
       <button className="cursor-pointer flex gap-2" onClick={handleViewCart}>
-        View Cart({cartProductLength})
+        View Cart ({cartProductLength})
         <ShoppingCart strokeWidth={1.5} />
       </button>
     </div>
